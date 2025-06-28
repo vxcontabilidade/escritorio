@@ -536,6 +536,13 @@
         <label for="message">Mensagem</label>
         <textarea id="message" name="message" rows="5" required></textarea>
         <button type="button" onclick="sendEmail()">Enviar</button>
+	<form id="contact-form" autocomplete="off">
+  	<input type="text" id="name" name="name" autocomplete="off">
+ 	 <input type="text" id="phone" name="phone" autocomplete="off">
+ 	 <input type="email" id="email" name="email" autocomplete="off">
+ 	 <textarea id="message" name="message"></textarea>
+ 	 <button type="submit">Enviar</button>
+	</form>
 	<button onclick="document.getElementById('contact-form').reset()">Limpar Formulário</button>
       </div>
       <div class="social-links">
