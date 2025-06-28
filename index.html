@@ -582,6 +582,10 @@
         .then(() => {
           alert('Mensagem enviada com sucesso!');
           document.getElementById('contact-form').reset();
+	document.getElementById('name').value = '';
+        document.getElementById('phone').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('message').value = '';
         }, (error) => {
           alert('Erro ao enviar a mensagem: ' + JSON.stringify(error));
         });
