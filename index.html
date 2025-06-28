@@ -536,6 +536,7 @@
         <label for="message">Mensagem</label>
         <textarea id="message" name="message" rows="5" required></textarea>
         <button type="button" onclick="sendEmail()">Enviar</button>
+	<button onclick="document.getElementById('contact-form').reset()">Limpar Formulário</button>
       </div>
       <div class="social-links">
         <a href="https://www.instagram.com/vx_contabilidade?igsh=MTlodHh0OTliMWh1dg==">
@@ -581,7 +582,7 @@
       emailjs.send("service_7lrfedc", "template_7wcrlnj", templateParams)
         .then(() => {
           alert('Mensagem enviada com sucesso!');
-          document.getElementById('contact-form').reset();
+        document.getElementById('contact-form').reset();
 	document.getElementById('name').value = '';
         document.getElementById('phone').value = '';
         document.getElementById('email').value = '';
