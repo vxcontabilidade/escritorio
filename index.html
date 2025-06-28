@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Assessoria contábil para MEI e Simples Nacional sem complicações! Abertura grátis, DAS, DASN-SIMEI e mais.">
+  <meta name="keywords" content="contador, MEI, contabilidade, Simples Nacional, abrir MEI, emissão nota fiscal, DAS, DASN-SIMEI, imposto de renda, cálculos trabalhistas, certificado digital">
+  <meta name="author" content="VX Contabilidade">
+  <!-- Open Graph and Twitter Card -->
+  <meta property="og:title" content="VX Contabilidade | Contabilidade para MEI e Simples Nacional">
+  <meta property="og:description" content="Soluções contábeis simples e eficientes para MEI e Simples Nacional. Abertura grátis e suporte completo!">
+  <meta property="og:image" content="images/IMAGEM A.jpg">
+  <meta property="og:url" content="https://yourwebsite.com">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>VX Contabilidade | Contabilidade para MEI e Simples Nacional</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/6a7f3e1d8b.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+</head>
+<body class="font-poppins bg-gray-50">
+  <!-- Header -->
+  <header class="bg-gradient-to-r from-green-800 to-green-900 text-yellow-100 py-2 sticky top-0 z-50 shadow-md">
+    <div class="container mx-auto px-4 flex justify-between items-center">
+      <h1 class="text-4xl font-bold flex items-center">
+        <i class="fas fa-calculator mr-50"></i> VX Contabilidade </h1>
+<body>
+  <header>
+    <img src="images/vxlogo.png" alt="Logotipo do site" width="200">
+  </header>
+</body>
+
+
+
+
+
+
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Hamburger</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 200vh; /* Para permitir rolagem */
+        }
+
+        /* Estilo do menu hamburger */
+        .hamburger-menu {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .hamburger-icon {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .hamburger-icon span {
+            width: 100%;
+            height: 3px;
+            background-color: #fefcbf; /* Cor dos traços: yellow-100 */
+            transition: all 0.3s ease;
+        }
+
+        /* Estilo do menu dropdown */
+        .menu-content {
+            display: none;
+            position: absolute;
+            top: 30px;
+            right: 0;
+            background-color: #f8f8f8; /* Cor de fundo do menu: cinza claro */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border: 2px solid #007bff; /* Cor da borda: azul */
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .menu-content a {
+            display: block;
+            padding: 15px 20px;
+            text-decoration: none;
+            color: #333; /* Cor das letras: cinza escuro */
+            font-size: 16px;
+            font-weight: bold; /* Texto em negrito */
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .menu-content a:hover {
+            background-color: #e0e0e0; /* Cor de fundo ao passar o mouse: cinza mais claro */
+            color: #007bff; /* Cor das letras ao passar o mouse: azul */
+        }
+
+        /* Mostrar menu quando ativo */
+        .menu-content.active {
+            display: block;
+        }
+
+        /* Animação do ícone hamburger ao abrir/fechar */
+        .hamburger-icon.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger-icon.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-icon.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+    </style>
+</head>
+<body>
+    <div class="hamburger-menu">
+        <div class="hamburger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="menu-content">
+             <a href="#home" class="hover:underline">Início</a>
+          <a href="#services" class="hover:underline">Serviços</a>
+          <a href="#about" class="hover:underline">Sobre</a>
+          <a href="#contact" class="hover:underline">Contato</a>
+        </div>
+    </div>
+
+    <script>
+        const hamburgerIcon = document.querySelector('.hamburger-icon');
+        const menuContent = document.querySelector('.menu-content');
+        const hamburgerMenu = document.querySelector('.hamburger-menu');
+
+        hamburgerIcon.addEventListener('click', () => {
+            hamburgerIcon.classList.toggle('active');
+            menuContent.classList.toggle('active');
+        });
+
+        // Fechar menu ao clicar fora
+        document.addEventListener('click', (event) => {
+            if (!hamburgerMenu.contains(event.target) && !menuContent.contains(event.target)) {
+                hamburgerIcon.classList.remove('active');
+                menuContent.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+
+
+
+
+
+
+      <!-- Hamburger Menu -->
+      <button id="menu-toggle" class="md:hidden text-4xl focus:outline-none">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+    <!-- Mobile Menu -->
+    <nav id="mobile-menu" class="hidden md:hidden bg-green-800 text-yellow-100">
+      <ul class="flex flex-col items-center space-y-4 py-4">
+        <li><a href="#home" class="hover:underline">Início</a></li>
+        <li><a href="#services" class="hover:underline">Serviços</a></li>
+        <li><a href="#about" class="hover:underline">Sobre</a></li>
+        <li><a href="#contact" class="hover:underline">Contato</a></li>
+	<li><a href="https://www.instagram.com/vx_contabilidade?igsh=MTlodHh0OTliMWh1dg==" class="hover:underline">Instagram</a></li>
+	<li><a href="https://wa.me/5521985430782" class="hover:underline">Chamar no WhatsApp</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+	<section id="home" class="bg-blue-100 py-20 bg-cover bg-center" style="background-image: url('images/IMAGEM A.png')">
+    <div class="container mx-auto px-4 text-center animate-slide-up">
+      <h2 class="text-4xl md:text-5xl font-bold text-yellow-100 mb-6 drop-shadow-md">
+<br>
+<br>
+<br>
+      Contabilidade Eficiente para o Crescimento da Sua Empresa!
+      </h2>
+      <p class="text-lg md:text-3xl font-bold text-yellow-100 mb-8 drop-shadow-md">
+        MEI e Simples Nacional sem complicações! Abertura de CNPJ e DASN-SIMEI grátis.
+      </p>
+  
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <h2 class="text-5xl font-bold text-center mb-12 text-green-900">Nossos Serviços</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover-scale animate-slide-up">
+          <img loading="lazy" src="images/IMAGEM B.png" onerror="this.src='https://via.placeholder.com/400x160?text=Abertura+MEI'" class="w-full h-50 object-cover rounded-t-xl mb-5">
+          <h3 class="text-3xl font-semibold mb-5 flex items-center"><i class="fas fa-store mr-3 text-blue-600"></i> Abertura de MEI Grátis</h3>
+          <p class="text-gray-600" style="font-size: 19px">Formalize o seu negócio como MEI sem custos! Obtenha CNPJ, emita notas fiscais, acesse crédito empresarial e tenha direitos previdenciários com a nossa assessoria completa.</p>
+        </div>
+        <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover-scale animate-slide-up" style="animation-delay: 0.2s;">
+          <img loading="lazy" src="images/IMAGEM C.png" alt="Gestão de DAS" onerror="this.src='https://via.placeholder.com/400x160?text=Gestão+DAS'" class="w-full h-50 object-cover rounded-t-xl mb-5">
+          <h3 class="text-3xl font-semibold mb-2 flex items-center"><i class="fas fa-file-invoice mr-2 text-blue-600"></i> Gestão de DAS e DASN-SIMEI</h3>
+          <p class="text-gray-600" style="font-size: 19px">Gerenciamos o seu DAS mensalmente e entregamos a Declaração Anual até  o dia 31/05 do exercício subsequente. Fornecemos planilhas de gestão da lucratividade e gestão do estoque para o acompanhamento e crescimento do seu negócio.</p>
+        </div>
+        <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover-scale animate-slide-up" style="animation-delay: 0.4s;">
+          <img loading="lazy" src="images/IMAGEM D.png" onerror="this.src='https://via.placeholder.com/400x160?text=Simples+Nacional'" class="w-full h-50 object-cover rounded-t-xl mb-5">
+          <h3 class="text-3xl font-semibold mb-2 flex items-center"><i class="fas fa-chart-line mr-2 text-blue-600"></i> Simples Nacional</h3>
+          <p class="text-gray-600" style="font-size: 19px">Contabilidade completa para empresas do Simples Nacional com apuração de impostos, folha de pagamento e consultoria tributária. Foco na conformidade e crescimento do seu negócio.</p>
+        </div>
+        <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover-scale animate-slide-up" style="animation-delay: 0.6s;">
+          <img loading="lazy" src="images/IMAGEM E.png" alt="Imposto de Renda" class="w-full h-50 object-cover rounded-t-xl mb-5">
+          <h3 class="text-3xl font-semibold mb-2 flex items-center"><i class="fas fa-chart-line mr-2 text-blue-600"></i> Imposto de Renda</h3>
+          <p class="text-gray-600" style="font-size: 19px">Declaração de Imposto de Renda para Pessoa Física e MEI com precisão e segurança. Evite a malha fina com a nossa análise detalhada e maximize as suas deduções legais. Seu CPF já está pendente de regularização? Regularizamos a sua situação cadastral.</p>
+        </div>
+        <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover-scale animate-slide-up" style="animation-delay: 0.8s;">
+          <img loading="lazy" src="images/IMAGEM F.png" alt="Certificado Digital" class="w-full h-50 object-cover rounded-t-xl mb-5">
+          <h3 class="text-3xl font-semibold mb-2 flex items-center"><i class="fas fa-chart-line mr-2 text-blue-600"></i> Certificado Digital</h3>
+          <p class="text-gray-600" style="font-size: 19px">Emissão e renovação de certificados e-CPF e e-CNPJ (A1 e A3) com agilidade e suporte completo. Atendimento presencial ou por videoconferência.</p>
+        </div>
+        <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover-scale animate-slide-up" style="animation-delay: 0.8s;">
+          <img loading="lazy" src="images/IMAGEM G.png" alt="Cálculos trabalhistas" class="w-full h-50 object-cover rounded-t-xl mb-5">
+          <h3 class="text-3xl font-semibold mb-2 flex items-center"><i class="fas fa-chart-line mr-2 text-blue-600"></i> Cálculos Trabalhistas</h3>
+          <p class="text-gray-600" style="font-size: 19px">Realizo cálculos de rescisões, horas extras, férias, 13º, FGTS e outras verbas trabalhistas. Elaboro laudos claros e ágeis para processos judiciais e extrajudiciais.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="bg-blue-50 py-16">
+    <div class="container mx-auto px-4 text-center animate-slide-up">
+      <h2 class="text-4xl font-bold mb-8 text-green-900">Quem Somos</h2>
+      <div class="flex flex-col md:flex-row items-center gap-8">
+        <img loading="lazy" src="images/IMAGEM H.png" alt="Equipe Contabilidade" onerror="this.src='https://via.placeholder.com/600x400?text=Equipe+Contabilidade'" class="w-full md:w-1/3 rounded-xl shadow-md">
+        <div class="text-left">
+          <p class="text-2xl text-gray-700 mb-4">Sou Vitor de Oliveira Xavier, contador inscrito no CRC-RJ sob nº 137627/O-4. Graduado em Ciências Contábeis pela Universidade Estácio de Sá e pós-graduado em Gestão de Departamento Pessoal pela Unifaveni. Sou especialista em contabilidade para MEIs e empresas do Simples Nacional. Meu foco é simplificar a gestão fiscal, oferecendo soluções eficientes para o crescimento do seu negócio.</p>
+          <p class="text-2xl text-gray-700">Atendo toda a Região Metropolitana do Rio de Janeiro, com serviços personalizados e suporte contínuo.</p>
+        </div>
+      </div>
+      <div class="mt-12">
+        <h3 class="text-4xl font-bold mb-4 text-green-900">Missão</h3>
+        <p class="text-2xl text-gray-700 style="font-size: 19px mb-8">Oferecer serviços contábeis com ética e transparência, ajudando empreendedores a tomar decisões estratégicas para o sucesso sustentável dos seus negócios.</p>
+<br>
+
+        <h3 class="text-4xl font-bold mb-4 text-green-900">Visão</h3>
+        <p class="text-2xl text-gray-700 style="font-size: 19px mb-8">Ser referência em contabilidade, construindo confiança e agregando valor com soluções modernas e personalizadas.</p>
+<br>
+        <h3 class="text-4xl font-bold mb-4 text-green-900">Valores</h3>
+        <ul class="text-2xl text-gray-700 style="font-size: 19px list-disc list-inside">
+          <li>Ética e Transparência: honestidade e conformidade com normas contábeis.</li>
+<br>
+          <li>Comprometimento: dedicação às necessidades dos clientes.</li>
+<br>
+          <li>Inovação: atualização contínua e uso de novas tecnologias.</li>
+<br>
+          <li>Foco no Cliente: soluções personalizadas para cada negócio.</li>
+<br>
+          <li>Confidencialidade: segurança e privacidade das informações.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <h2 class="text-4xl font-bold text-center mb-12 text-green-900">Entre em Contato</h2>
+      <div class="max-w-lg mx-auto bg-gray-50 p-8 rounded-xl shadow-lg animate-slide-up">
+        <form id="contact-form" action="https://formspree.io/f/xanjlzed" method="POST" aria-label="Formulário de Contato">
+          <div class="mb-6">
+            <label for="name" class="block text-lg font-semibold text-gray-700 mb-2 flex items-center"><i class="fas fa-user mr-4 text-green-900"></i> Nome</label>
+            <input type="text" id="name" name="name" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-600" required aria-required="true">
+            <p class="text-red-500 text-sm hidden" id="name-error">Por favor, insira seu nome.</p>
+          </div>
+          <div class="mb-6">
+            <label for="email" class="block text-lg font-semibold text-gray-700 mb-2 flex items-center"><i class="fas fa-envelope mr-2 text-green-900"></i> E-mail</label>
+            <input type="email" id="email" name="email" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-600" required aria-required="true">
+            <p class="text-red-500 text-sm hidden" id="email-error">Por favor, insira um e-mail válido.</p>
+          </div>
+          <div class="mb-6">
+            <label for="message" class="block text-lg font-semibold text-gray-700 mb-2 flex items-center"><i class="fas fa-comment mr-2 text-green-900"></i> Mensagem</label>
+            <textarea id="message" name="message" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-600" rows="4" required aria-required="true"></textarea>
+            <p class="text-red-500 text-sm hidden" id="message-error">Por favor, insira uma mensagem.</p>
+          </div>
+          <button type="submit" class="bg-green-900 text-yellow-100 px-8 py-3 rounded-full font-semibold hover:bg-yellow-400 hover-scale w-full">Enviar Mensagem</button>
+          <p class="text-green-600 text-lg mt-4 hidden" id="form-success">Mensagem enviada com sucesso!</p>
+          <p class="text-red-500 text-lg mt-4 hidden" id="form-error">Erro ao enviar a mensagem. Tente novamente.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+
+
+<body>
+  <!-- Seção para o endereço -->
+  <section class="py-8 px-4 bg-gray-100">
+    <h2 class="text-4xl font-semibold text-center mb-4">VX Contabilidade</h2>
+    <div class="max-w-md mx-auto text-center">
+      <address class="text-gray-600 text-2xl  not-italic">
+        Travessa Joaquim Seabra, 42, Nova Cidade<br>
+        São Gonçalo, Rio de Janeiro, CEP: 24455-440<br>
+         </address>
+      <p class="mt-4">
+       </p>
+    </div>
+
+
+<head>
+  <meta charset="UTF-8">
+  <title>Imagem Centralizada</title>
+  <style>
+    body, html {
+      height: 30%;
+      margin: 10;
+    }
+
+    .centro {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 10vh; /* 100% da altura da janela */
+    }
+
+    img {
+      max-width: 50%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="centro">
+     <a href="https://www.instagram.com/vx_contabilidade?igsh=MTlodHh0OTliMWh1dg==" class="hover:underline">
+      <img src="images/insta.png" alt="Logotipo do Instagram" width="150">
+    </a>
+ <a href="https://wa.me/5521985430782" class="hover:underline">
+      <img src="images/whats.png" alt="Logotipo do WhatsApp" width="150">
+    </a>
+  </div>
+</body>
+
+  </section>
+</body>
+<!-- Mapa -->
+      <div class="md:w-1/2">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d470585.5722958972!2d-43.6084183!3d-22.8598374!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6369bd747cd8ab49%3A0x9b2e7a2aeaa65670!2sVX%20Contabilidade!5e0!3m2!1spt-BR!2sbr!4v1751071132714!5m2!1spt-BR!2sbr" width="1900" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+  <!-- Footer -->
+  <footer class="bg-gradient-to-r from-green-800 to-green-900 text-yellow-100 py-8">
+    <div class="container mx-auto px-4 text-center">
+      <p class="mb-2">© 2025 VX Contabilidade. Todos os direitos reservados.</p>
+      <p><i class="fas fa-envelope"></i> <i class="fas fa-phone-alt"></i> </p>
+      <div class="mt-4 flex justify-center space-x-4">
+        <a href="#" class="text-white hover:text-yellow-400" aria-label="WhatsApp"><i class="fab fa-whatsapp fa-lg"></i></a>
+        <a href="#" class="text-white hover:text-yellow-400" aria-label="Instagram"><i class="fab fa-instagram fa-lg"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Hamburger menu toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Form validation and submission
+    const contactForm = document.getElementById('contact-form');
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const messageInput = document.getElementById('message');
+    const nameError = document.getElementById('name-error');
+    const emailError = document.getElementById('email-error');
+    const messageError = document.getElementById('message-error');
+    const formSuccess = document.getElementById('form-success');
+    const formError = document.getElementById('form-error');
+
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      // Reset error messages
+      nameError.classList.add('hidden');
+      emailError.classList.add('hidden');
+      messageError.classList.add('hidden');
+      formSuccess.classList.add('hidden');
+      formError.classList.add('hidden');
+
+      // Validate inputs
+      let isValid = true;
+      if (!nameInput.value.trim()) {
+        nameError.classList.remove('hidden');
+        isValid = false;
+      }
+      if (!emailInput.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
+        emailError.classList.remove('hidden');
+        isValid = false;
+     12
+      if (!messageInput.value.trim()) {
+        messageError.classList.remove('hidden');
+        isValid = false;
+      }
+
+      if (isValid) {
+        try {
+          const response = await fetch(contactForm.action, {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              name: nameInput.value,
+              email: emailInput.value,
+              message: messageInput.value
+            })
+          });
+
+          if (response.ok) {
+            formSuccess.classList.remove('hidden');
+            contactForm.reset();
+          } else {
+            formError.classList.remove('hidden');
+          }
+        } catch (error) {
+          formError.classList.remove('hidden');
+        }
+      }
+    });
+  </script>
+</body>
+</html>
