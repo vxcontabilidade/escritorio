@@ -199,6 +199,7 @@
       text-align: center;
       font-size: 28px;
       margin: 40px 0 20px;
+      color: #2c7873;
     }
 
     .about-section {
@@ -237,6 +238,32 @@
     .values-list p {
       margin: 10px auto;
       max-width: 800px;
+    }
+
+    .privacy-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: justify;
+    }
+
+    .privacy-content h3 {
+      font-size: 22px;
+      margin: 20px 0 10px;
+      color: #2c7873;
+    }
+
+    .privacy-content p {
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+
+    .privacy-content ul {
+      margin: 15px 0;
+      padding-left: 20px;
+    }
+
+    .privacy-content li {
+      margin-bottom: 10px;
     }
 
     /* Contact Form */
@@ -338,7 +365,7 @@
       background-color: #2c7873;
       color: #f7e8a0;
       width: 100%;
-      margin-top: auto;
+     〜
     }
 
     .section-footer p {
@@ -358,17 +385,7 @@
     }
 
     /* Full-screen sections */
-    #servicos, #inicio {
-      width: 100%;
-      max-width: 1200px;
-      padding: 20px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      min-height: calc(100vh - 80px);
-    }
-
-    #sobre, #contato {
+    #servicos, #inicio, #sobre, #contato, #politica-privacidade {
       width: 100%;
       max-width: 1200px;
       padding: 20px;
@@ -438,6 +455,14 @@
 
       .map iframe {
         max-width: 100%;
+      }
+
+      .privacy-content h3 {
+        font-size: 20px;
+      }
+
+      .privacy-content p {
+        font-size: 14px;
       }
     }
   </style>
@@ -566,7 +591,7 @@
           <label for="message">Mensagem</label>
           <textarea id="message" name="message" rows="5" required></textarea>
           <div class="lgpd-notice">
-            <p>Ao enviar este formulário, você concorda com a coleta e tratamento de seus dados pessoais conforme a Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018). Seus dados serão usados exclusivamente para responder à sua solicitação e não serão compartilhados com terceiros sem seu consentimento. Para mais informações, consulte nossa <a href="politica-de-privacidade.html">Política de Privacidade</a>.</p>
+            <p>Ao enviar este formulário, você concorda com a coleta e tratamento de seus dados pessoais conforme a Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018). Seus dados serão usados exclusivamente para responder à sua solicitação e não serão compartilhados com terceiros sem seu consentimento. Para mais informações, consulte nossa <a href="#politica-privacidade" onclick="showSection('politica-privacidade')">Política de Privacidade</a>.</p>
           </div>
           <div class="g-recaptcha" data-sitekey="6Le3fnErAAAAAEFqQ3a3px-EvLdAueMRPG-9HErC"></div>
           <button type="button" onclick="sendEmail()">Enviar</button>
@@ -587,6 +612,74 @@
         <p>® VX Contabilidade. Todos os direitos reservados.</p>
       </div>
     </section>
+
+    <section id="politica-privacidade" style="display: none;">
+      <h2 class="section-title">Política de Privacidade</h2>
+      <div class="privacy-content">
+        <p>A VX Contabilidade, site do contador autônomo Vitor de Oliveira Xavier, inscrito no CPF sob o nº 112.688.237-24, com sede na cidade de São Gonçalo, RJ, está comprometida com a proteção dos dados pessoais de seus clientes, parceiros e visitantes, em conformidade com a Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018). Esta Política de Privacidade descreve como coletamos, usamos, armazenamos e protegemos suas informações.</p>
+
+        <h3>1. Dados Coletados</h3>
+        <p>Nós coletamos os seguintes dados pessoais fornecidos por você:</p>
+        <ul>
+          <li>Nome completo;</li>
+          <li>Telefone;</li>
+          <li>E-mail;</li>
+          <li>Mensagens enviadas por meio do formulário de contato;</li>
+          <li>Outros dados fornecidos voluntariamente durante a interação com nossos serviços.</li>
+        </ul>
+        <p>Também podemos coletar dados de navegação, como endereço IP, tipo de dispositivo, navegador utilizado e páginas visitadas, por meio de cookies e tecnologias similares, para melhorar sua experiência em nosso site.</p>
+
+        <h3>2. Finalidade da Coleta</h3>
+        <p>Os dados coletados são utilizados para:</p>
+        <ul>
+          <li>Responder às suas solicitações e prestar atendimento personalizado;</li>
+          <li>Enviar comunicações relacionadas aos serviços contratados;</li>
+          <li>Cumprir obrigações legais e fiscais;</li>
+          <li>Melhorar a funcionalidade e a segurança do nosso site;</li>
+          <li>Realizar análises estatísticas para aprimorar nossos serviços.</li>
+        </ul>
+
+        <h3>3. Compartilhamento de Dados</h3>
+        <p>Seus dados pessoais não serão compartilhados com terceiros, exceto:</p>
+        <ul>
+          <li>Com prestadores de serviços que nos auxiliam na operação do site (ex.: serviços de hospedagem, e-mail e reCAPTCHA), sob contratos que garantem a proteção dos dados;</li>
+          <li>Para cumprir exigências legais, como ordens judiciais ou solicitações de autoridades competentes;</li>
+          <li>Com seu consentimento expresso, quando necessário.</li>
+        </ul>
+
+        <h3>4. Armazenamento e Segurança</h3>
+        <p>Os dados são armazenados em ambientes seguros, com medidas técnicas e administrativas para protegê-los contra acessos não autorizados, perda ou uso indevido. Mantemos os dados pelo tempo necessário para cumprir as finalidades descritas ou conforme exigido por lei.</p>
+
+        <h3>5. Direitos do Titular dos Dados</h3>
+        <p>De acordo com a LGPD, você tem os seguintes direitos:</p>
+        <ul>
+          <li>Confirmar a existência de tratamento de dados;</li>
+          <li>Acessar seus dados pessoais;</li>
+          <li>Corrigir dados incompletos, inexatos ou desatualizados;</li>
+          <li>Solicitar a exclusão de dados desnecessários ou tratados em desconformidade com a LGPD;</li>
+          <li>Revogar o consentimento, quando aplicável.</li>
+        </ul>
+        <p>Para exercer esses direitos, entre em contato pelo e-mail vxcontabilidade@example.com.</p>
+
+        <h3>6. Cookies e Tecnologias de Rastreamento</h3>
+        <p>Nosso site utiliza cookies para melhorar a experiência do usuário e coletar dados de navegação. Você pode gerenciar as preferências de cookies diretamente no seu navegador.</p>
+
+        <h3>7. Alterações nesta Política</h3>
+        <p>Podemos atualizar esta Política de Privacidade periodicamente para refletir mudanças em nossas práticas ou na legislação. Recomendamos que você reveja esta página regularmente.</p>
+
+        <h3>8. Contato</h3>
+        <p>Se você tiver dúvidas sobre esta Política de Privacidade ou sobre o tratamento de seus dados, entre em contato conosco:</p>
+        <ul>
+          <li>E-mail: vxcontabilidade@example.com</li>
+          <li>Telefone: (21) 98543-0782</li>
+          <li>Endereço: Travessa Joaquim Seabra,nº 42, Nova Cidade, São Gonçalo, RJ</li>
+        </ul>
+        <p>Última atualização: 29 de junho de 2025.</p>
+      </div>
+      <div class="footer">
+        <p>® VX Contabilidade. Todos os direitos reservados.</p>
+      </div>
+    </section>
   </main>
 
   <script>
@@ -596,7 +689,7 @@
     }
 
     function showSection(sectionId) {
-      const sections = ['inicio', 'servicos', 'sobre', 'contato'];
+      const sections = ['inicio', 'servicos', 'sobre', 'contato', 'politica-privacidade'];
       sections.forEach(id => {
         document.getElementById(id).style.display = id === sectionId ? 'block' : 'none';
       });
@@ -635,8 +728,15 @@
         });
     }
 
-    // Show 'inicio' section by default
-    showSection('inicio');
+    // Show section based on URL hash or default to 'inicio'
+    window.addEventListener('load', () => {
+      const hash = window.location.hash.replace('#', '');
+      if (['inicio', 'servicos', 'sobre', 'contato', 'politica-privacidade'].includes(hash)) {
+        showSection(hash);
+      } else {
+        showSection('inicio');
+      }
+    });
   </script>
 </body>
 </html>
