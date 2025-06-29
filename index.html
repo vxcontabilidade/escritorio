@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VX Contabilidade</title>
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <style>
     * {
       margin: 0;
@@ -281,6 +282,29 @@
       background-color: #22635e;
     }
 
+    .lgpd-notice {
+      text-align: center;
+      font-size: 14px;
+      color: #555;
+      max-width: 500px;
+      margin-bottom: 15px;
+    }
+
+    .lgpd-notice a {
+      color: #2c7873;
+      text-decoration: none;
+    }
+
+    .lgpd-notice a:hover {
+      text-decoration: underline;
+    }
+
+    .g-recaptcha {
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: center;
+    }
+
     .social-links {
       text-align: center;
       margin-bottom: 40px;
@@ -407,6 +431,11 @@
         max-width: 100%;
       }
 
+      .lgpd-notice {
+        font-size: 12px;
+        padding: 0 10px;
+      }
+
       .map iframe {
         max-width: 100%;
       }
@@ -445,8 +474,7 @@
       <div class="hero-image">
         <img src="IMAGEM A.png" alt="Imagem Principal">
       </div>
-    <h1 class="title">Contabilidade eficiente para o crescimento da sua empresa!
-</h1>
+      <h1 class="title">Contabilidade eficiente para o crescimento da sua empresa!</h1>
       <h2 class="subtitle">MEI e Simples Nacional sem complicações! Abertura de CNPJ e DASN-SIMEI grátis.</h2>
       <div class="welcome-message">
         <h2>Seja muito bem-vindo(a)!</h2>
@@ -528,19 +556,23 @@
     <section id="contato" style="display: none;">
       <h2 class="section-title">Entre em contato</h2>
       <div class="contact-form">
-	<form>
-        <label for="name">Nome</label>
-        <input type="text" id="name" name="name" required>
-        <label for="phone">Telefone</label>
-        <input type="tel" id="phone" name="phone" required>
-        <label for="email">E-mail</label>
-        <input type="email" id="email" name="email" required>
-        <label for="message">Mensagem</label>
-        <textarea id="message" name="message" rows="5" required></textarea>
-        <button type="button" onclick="sendEmail()">Enviar</button>
-	</form>
-	 </div>
-	<div class="social-links">
+        <form id="contact-form">
+          <label for="name">Nome</label>
+          <input type="text" id="name" name="name" required>
+          <label for="phone">Telefone</label>
+          <input type="tel" id="phone" name="phone" required>
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" required>
+          <label for="message">Mensagem</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+          <div class="lgpd-notice">
+            <p>Ao enviar este formulário, você concorda com a coleta e tratamento de seus dados pessoais conforme a Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018). Seus dados serão usados exclusivamente para responder à sua solicitação e não serão compartilhados com terceiros sem seu consentimento. Para mais informações, consulte nossa <a href="politica-de-privacidade.html">Política de Privacidade</a>.</p>
+          </div>
+          <div class="g-recaptcha" data-sitekey="6Le3fnErAAAAAEFqQ3a3px-EvLdAueMRPG-9HErC"></div>
+          <button type="button" onclick="sendEmail()">Enviar</button>
+        </form>
+      </div>
+      <div class="social-links">
         <a href="https://www.instagram.com/vx_contabilidade?igsh=MTlodHh0OTliMWh1dg==">
           <img src="insta.png" alt="Instagram">
         </a>
@@ -574,23 +606,31 @@
     emailjs.init("s0FfO34iE-17Lz7Wc");
 
     function sendEmail() {
-       templateParams = {
+      // Verify reCAPTCHA
+      const recaptchaResponse = grecaptcha.getResponse();
+      if (!recaptchaResponse) {
+        alert('Por favor, complete o reCAPTCHA para verificar que você não é um robô.');
+        return;
+      }
+
+      const templateParams = {
         name: document.getElementById('name').value,
         phone: document.getElementById('phone').value,
         email: document.getElementById('email').value,
-        message: document.getElementById('message').value
+        message: document.getElementById('message').value,
+        'g-recaptcha-response': recaptchaResponse
       };
 
       emailjs.send("service_7lrfedc", "template_7wcrlnj", templateParams)
         .then(() => {
-        alert('Mensagem enviada com sucesso!');
-        document.getElementById('contact-form').reset();
-	document.getElementById('name').value = '';
-        document.getElementById('phone').value = '';
-        document.getElementById('email').value = '';
-        document.getElementById('message').value = '';
- 	document.getElementById("contact-form").reset();
-	}, (error) => {
+          alert('Mensagem enviada com sucesso!');
+          document.getElementById('contact-form').reset();
+          document.getElementById('name').value = '';
+          document.getElementById('phone').value = '';
+          document.getElementById('email').value = '';
+          document.getElementById('message').value = '';
+          grecaptcha.reset();
+        }, (error) => {
           alert('Erro ao enviar a mensagem: ' + JSON.stringify(error));
         });
     }
