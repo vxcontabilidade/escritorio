@@ -70,7 +70,7 @@
     .nav-menu a {
       color: #f7e8a0;
       text-decoration: bold;
-      font-size: 20px;
+      font-size: 18px;
     }
 
     .nav-menu a:hover {
@@ -109,7 +109,7 @@
       display: block;
       color: #f7e8a0;
       text-decoration: bold;
-      font-size: 20px;
+      font-size: 18px;
       margin: 15px 0;
       text-align: center;
     }
@@ -126,35 +126,12 @@
       flex-grow: 1;
     }
 
-  body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden; /* Evita rolagem horizontal */
-}
-
-.header {
-    width: 100%; /* Garante que o cabeçalho ocupe a largura total */
-    margin: 0; /* Remove margens */
-    padding: 0; /* Remove padding */
-    line-height: normal; /* Evita espaços causados por line-height */
-    display: flex; /* Opcional: para alinhar logo e menu */
-    justify-content: space-between; /* Opcional: para layout do cabeçalho */
-    align-items: center; /* Opcional: centraliza verticalmente */
-}
-
-.hero-image {
-    width: 100%; /* Contêiner ocupa a largura total */
-    margin: 0; /* Remove margens */
-    padding: 0; /* Remove padding */
-    line-height: 0; /* Remove espaços indesejados */
-}
-
-.hero-image img {
-    width: 100%; /* Ocupa a largura total do contêiner pai */
-    height: auto; /* Mantém a proporção */
-    display: block; /* Remove espaços abaixo da imagem */
-    margin: 0; /* Remove margens */
-}
+    .hero-image img {
+      width: 100vw;
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
 
     .title {
       text-align: center;
@@ -387,7 +364,6 @@
       background-color: #2c7873;
       color: #f7e8a0;
       width: 100%;
-     〜
     }
 
     .section-footer p {
