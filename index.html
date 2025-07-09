@@ -471,6 +471,53 @@
       .privacy-content p {
         font-size: 14px;
       }
+
+{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .carousel-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 50px auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .dots {
+            text-align: center;
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+        }
+
+        .dot {
+            height: 15px;
+            width: 15px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background-color: #717171;
+        }
     }
   </style>
 </head>
@@ -594,12 +641,62 @@
 
 	<h2 class="section-title">O que dizem sobre nós</h2>
 
-<div class="elementor-image-carousel-wrapper swiper swiper-initialized swiper-horizontal swiper-pointer-events" role="region" aria-roledescription="carousel" aria-label="Carrossel de imagens" dir="ltr">
+<div class="carousel-container">
+        <div class="carousel" id="carousel">
+            <img src="IMAGEM K.png" alt="IMAGEM K">
+	    <img src="IMAGEM L.png" alt="IMAGEM L">
+ 	    <img src="IMAGEM M.png" alt="IMAGEM M">
+	    <img src="IMAGEM N.png" alt="IMAGEM N">
+	    <img src="IMAGEM O.png" alt="IMAGEM O">
+	    <img src="IMAGEM P.png" alt="IMAGEM P">
+	    <img src="IMAGEM Q.png" alt="IMAGEM Q">
+        
+        </div>
+        <div class="dots" id="dots"></div>
+    </div>
 
-			<div class="elementor-image-carousel swiper-wrapper" aria-live="off" id="swiper-wrapper-e54c9b180a9168b10" style="transform: translate3d(-1940px, 0px, 0px); transition-duration: 0ms;"><div class="swiper-slide swiper-slide-duplicate" role="group" aria-roledescription="slide" aria-label="7 / 10" data-swiper-slide-index="6" aria-hidden="true" inert="" style="width: 222.5px; margin-right: 20px;"><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="IMAGEM K.png" alt="depoimentos5"></figure></div><div class="swiper-slide swiper-slide-duplicate" role="group" aria-roledescription="slide" aria-label="8 / 10" data-swiper-slide-index="7" aria-hidden="true" inert="" style="width: 222.5px; margin-right: 20px;"><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="IMAGEM L.png" alt="depoimentos4"></figure></div><div class="swiper-slide swiper-slide-duplicate" role="group" aria-roledescription="slide" aria-label="9 / 10" data-swiper-slide-index="8" aria-hidden="true" inert="" style="width: 222.5px; margin-right: 20px;"><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="IMAGEM M.png" alt="depoimentos3"></figure></div><div class="swiper-slide swiper-slide-duplicate" role="group" aria-roledescription="slide" aria-label="10 / 10" data-swiper-slide-index="9" aria-hidden="true" inert="" style="width: 222.5px; margin-right: 20px;"><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="IMAGEM N.png" alt="depoimentos2"></figure></div>
-								<div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="1 / 10" data-swiper-slide-index="0" style="width: 222.5px; margin-right: 20px;" aria-hidden="true" inert=""><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="IMAGEM O.png" alt="depoimentos10"></figure></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="2 / 10" data-swiper-slide-index="1" style="width: 222.5px; margin-right: 20px;" aria-hidden="true" inert=""><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="IMAGEM P.png" alt="depoimentos1"></figure></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="3 / 10" data-swiper-slide-index="2" style="width: 222.5px; margin-right: 20px;" aria-hidden="true" inert=""><figure class="swiper-slide-inner"><img decoding="async" class="swiper-slide-image" src="IMAGEM Q.png" alt="depoimentos9"></figure></div>
-									<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal"><span class="swiper-pagination-bullet" role="button" data-bullet-index="0" aria-label="Ir para o slide 1"></span><span class="swiper-pagination-bullet" role="button" data-bullet-index="1" aria-label="Ir para o slide 2"></span><span class="swiper-pagination-bullet" role="button" data-bullet-index="2" aria-label="Ir para o slide 3"></span><span class="swiper-pagination-bullet" role="button" data-bullet-index="3" aria-label="Ir para o slide 4"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active" role="button" data-bullet-index="4" aria-label="Ir para o slide 5" tabindex="0" aria-current="true"></span><span class="swiper-pagination-bullet" role="button" data-bullet-index="5" aria-label="Ir para o slide 6"></span><span class="swiper-pagination-bullet" role="button" data-bullet-index="6" aria-label="Ir para o slide 7"></span><span class="swiper-pagination-bullet" role="button" data-bullet-index="7" aria-label="Ir para o slide 8"></span><span class="swiper-pagination-bullet" role="button" data-bullet-index="8" aria-label="Ir para o slide 9"></span><span class="swiper-pagination-bullet" role="button" data-bullet-index="9" aria-label="Ir para o slide 10"></span></div>
-<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+    <script>
+        const carousel = document.getElementById('carousel');
+        const dotsContainer = document.getElementById('dots');
+        const images = carousel.getElementsByTagName('img');
+        let currentIndex = 0;
+        const totalImages = images.length;
+
+        // Criar bolinhas de navegação
+        for (let i = 0; i < totalImages; i++) {
+            const dot = document.createElement('span');
+            dot.classList.add('dot');
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(i));
+            dotsContainer.appendChild(dot);
+        }
+
+        const dots = document.getElementsByClassName('dot');
+
+        // Função para ir para um slide específico
+        function goToSlide(index) {
+            currentIndex = index;
+            carousel.style.transform = `translateX(-${index * 100}%)`;
+            updateDots();
+        }
+
+        // Atualizar bolinhas ativas
+        function updateDots() {
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].classList.toggle('active', i === currentIndex);
+            }
+        }
+
+        // Função para passar para o próximo slide
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % totalImages;
+            carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+            updateDots();
+        }
+
+        // Iniciar carrossel automático (muda a cada 3 segundos)
+        setInterval(nextSlide, 3000);
+    </script>
 </div>
 </div>
 
