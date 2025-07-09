@@ -623,7 +623,7 @@
         }
 
         /* Media query para dispositivos móveis */
-        @media screen and (max-width: 600px) {
+        @media screen and (max-width: 300px) {
             .carousel img {
                 height: 200px; /* Reduz a altura das imagens em telas menores */
             }
@@ -671,7 +671,6 @@
         const images = carousel.getElementsByTagName('img');
         let currentIndex = 0;
         const totalImages = images.length;
-
 
         // Criar bolinhas de navegação
         for (let i = 0; i < totalImages; i++) {
