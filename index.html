@@ -125,18 +125,33 @@
       flex-grow: 1;
     }
 
-    .hero-image {
-      width: 100vw;
-      max-width: none;
-      margin-left: calc(-50vw + 50%);
-      margin-right: calc(-50vw + 50%);
-    }
+.hero-image {
+  width: 100vw;
+  max-width: none;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+}
 
-    .hero-image img {
-      width: 100vw;
-      height: auto;
-      display: block;
-    }
+.hero-image img {
+  width: 100vw;
+  height: auto;
+  display: block;
+}
+
+/* Ajustes para telas maiores (desktop) */
+@media (min-width: 768px) {
+  .hero-image {
+    width: 100%;
+    max-width: 1200px; /* Define uma largura máxima para o container */
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-image img {
+    width: 100%;
+    max-width: 1200px; /* Limita a largura da imagem */
+    margin: 0 auto; /* Centraliza a imagem */
+  }
 
     .title {
       text-align: center;
