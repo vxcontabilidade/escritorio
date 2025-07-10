@@ -595,7 +595,7 @@
 
 	<h2 class="section-title">O que dizem sobre nós</h2>
 
-   <style>
+  <style>
         * {
             margin: 0;
             padding: 0;
@@ -604,7 +604,7 @@
 
         .carousel-container {
             width: 100%;
-            max-width: 960px;
+            max-width: 640px; /* Ajustado para 2 imagens */
             max-height: 360px;
             margin: 50px auto;
             overflow: hidden;
@@ -617,7 +617,7 @@
         }
 
         .carousel img {
-            width: 33.33%;
+            width: 50%; /* Cada imagem ocupa metade do contêiner */
             max-height: 360px;
             object-fit: contain;
             flex-shrink: 0;
@@ -625,7 +625,7 @@
 
         @media screen and (max-width: 600px) {
             .carousel-container {
-                max-width: 480px;
+                max-width: 320px;
                 max-height: 180px;
             }
 
@@ -638,7 +638,7 @@
             text-align: center;
             margin-top: 20px;
             width: 100%;
-            max-width: 960px;
+            max-width: 640px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -661,8 +661,7 @@
 <body>
     <div class="carousel-container">
         <div class="carousel" id="carousel">
-            <!-- Clones do último grupo (P,Q,R) -->
-            <img src="IMAGEM P.png" alt="IMAGEM P">
+            <!-- Clones do último grupo (Q,R) -->
             <img src="IMAGEM Q.png" alt="IMAGEM Q">
             <img src="IMAGEM R.png" alt="IMAGEM R">
             <!-- Grupos reais -->
@@ -674,26 +673,9 @@
             <img src="IMAGEM P.png" alt="IMAGEM P">
             <img src="IMAGEM Q.png" alt="IMAGEM Q">
             <img src="IMAGEM R.png" alt="IMAGEM R">
+            <!-- Clones do primeiro grupo (K,L) -->
             <img src="IMAGEM K.png" alt="IMAGEM K">
             <img src="IMAGEM L.png" alt="IMAGEM L">
-            <img src="IMAGEM M.png" alt="IMAGEM M">
-            <img src="IMAGEM N.png" alt="IMAGEM N">
-            <img src="IMAGEM O.png" alt="IMAGEM O">
-            <img src="IMAGEM P.png" alt="IMAGEM P">
-            <img src="IMAGEM Q.png" alt="IMAGEM Q">
-            <img src="IMAGEM R.png" alt="IMAGEM R">
-            <img src="IMAGEM K.png" alt="IMAGEM K">
-            <img src="IMAGEM L.png" alt="IMAGEM L">
-            <img src="IMAGEM M.png" alt="IMAGEM M">
-            <img src="IMAGEM N.png" alt="IMAGEM N">
-            <img src="IMAGEM O.png" alt="IMAGEM O">
-            <img src="IMAGEM P.png" alt="IMAGEM P">
-            <img src="IMAGEM Q.png" alt="IMAGEM Q">
-            <img src="IMAGEM R.png" alt="IMAGEM R">
-            <!-- Clones do primeiro grupo (K,L,M) -->
-            <img src="IMAGEM K.png" alt="IMAGEM K">
-            <img src="IMAGEM L.png" alt="IMAGEM L">
-            <img src="IMAGEM M.png" alt="IMAGEM M">
         </div>
         <div class="dots" id="dots"></div>
     </div>
@@ -703,8 +685,8 @@
         const dotsContainer = document.getElementById('dots');
         const images = carousel.getElementsByTagName('img');
         const totalImages = images.length;
-        const imagesPerSlide = 3;
-        const totalSlides = 8; // 8 grupos (K,L,M → N,O,P → Q,R,K → L,M,N → O,P,Q → R,K,L → M,N,O → P,Q,R)
+        const imagesPerSlide = 2;
+        const totalSlides = 4; // 4 grupos (K,L → M,N → O,P → Q,R)
         let currentIndex = 1; // Começa no primeiro grupo real (após clones)
 
         // Criar bolinhas de navegação para cada grupo
