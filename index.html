@@ -596,17 +596,10 @@
 	<h2 class="section-title">O que dizem sobre nós</h2>
 
   <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         .carousel-container {
             width: 100%;
-            max-width: 640px; /* Reduzido de 800px para 640px (80%) */
-            max-height: 360px; /* Ajustado proporcionalmente para manter proporção */
-            margin: 50px auto 50px auto;
+            max-width: 800px;
+            margin: 0 auto;
             overflow: hidden;
             position: relative;
         }
@@ -618,48 +611,32 @@
 
         .carousel img {
             width: 100%;
-            max-height: 360px; /* Ajustado para o contêiner */
-            object-fit: contain; /* Mantém proporção sem cortar */
+            height: auto;
             flex-shrink: 0;
         }
 
-        /* Media query para dispositivos móveis */
-        @media screen and (max-width: 600px) {
-            .carousel-container {
-                max-width: 320px; /* Reduzido proporcionalmente para mobile */
-                max-height: 180px; /* Ajustado proporcionalmente */
-            }
-
-            .carousel img {
-                max-height: 180px; /* Ajustado para mobile */
-            }
-        }
-
-        .dots {
-            text-align: center;
-            margin-top: 20px; /* Aumentado para garantir que as bolinhas fiquem abaixo */
-            width: 100%;
-            max-width: 640px; /* Alinhado com o contêiner */
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .dot {
-            height: 15px;
-            width: 15px;
-            margin: 0 5px;
-            background-color: #bbb;
-            border-radius: 50%;
-            display: inline-block;
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
             cursor: pointer;
+            font-size: 18px;
         }
 
-        .dot.active {
-            background-color: #717171;
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
         }
     </style>
 
-<div class="carousel-container">
+	<div class="carousel-container">
         <div class="carousel" id="carousel">
             <img src="IMAGEM K.png" alt="IMAGEM K">
 	    <img src="IMAGEM L.png" alt="IMAGEM L">
@@ -669,54 +646,51 @@
 	    <img src="IMAGEM P.png" alt="IMAGEM P">
 	    <img src="IMAGEM Q.png" alt="IMAGEM Q">
 	    <img src="IMAGEM R.png" alt="IMAGEM R">
-        
-        </div>
-        <div class="dots" id="dots"></div>
+          </div>
+        <button class="carousel-button prev" onclick="moveSlide(-1)">❮</button>
+        <button class="carousel-button next" onclick="moveSlide(1)">❯</button>
     </div>
 
     <div class="dots" id="dots"></div>
 
         <script>
-        const carousel = document.getElementById('carousel');
-        const dotsContainer = document.getElementById('dots');
-        const images = carousel.getElementsByTagName('img');
-        let currentIndex = 0;
-        const totalImages = images.length;
+        let currentIndex = 1; // Começa na primeira imagem real (após o clone)
+        const slides = document.querySelectorAll('.carousel img');
+        const totalSlides = slides.length;
+        const realSlidesCount = totalSlides - 2; // Total de imagens reais (excluindo clones)
 
-        // Criar bolinhas de navegação
-        for (let i = 0; i < totalImages; i++) {
-            const dot = document.createElement('span');
-            dot.classList.add('dot');
-            if (i === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => goToSlide(i));
-            dotsContainer.appendChild(dot);
-        }
+        function moveSlide(direction) {
+            currentIndex += direction;
 
-        const dots = document.getElementsByClassName('dot');
+            const carousel = document.getElementById('carousel');
+            carousel.style.transition = 'transform 0.5s ease-in-out';
+            carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
 
-        // Função para ir para um slide específico
-        function goToSlide(index) {
-            currentIndex = index;
-            carousel.style.transform = `translateX(-${index * 100}%)`;
-            updateDots();
-        }
-
-        // Atualizar bolinhas ativas
-        function updateDots() {
-            for (let i = 0; i < dots.length; i++) {
-                dots[i].classList.toggle('active', i === currentIndex);
+            // Quando atingir o clone da última imagem (índice 0), pular para a última imagem real
+            if (currentIndex === 0) {
+                setTimeout(() => {
+                    carousel.style.transition = 'none';
+                    currentIndex = realSlidesCount;
+                    carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+                }, 500); // Tempo igual à duração da transição
+            }
+            // Quando atingir o clone da primeira imagem (índice totalSlides-1), pular para a primeira imagem real
+            else if (currentIndex === totalSlides - 1) {
+                setTimeout(() => {
+                    carousel.style.transition = 'none';
+                    currentIndex = 1;
+                    carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+                }, 500); // Tempo igual à duração da transição
             }
         }
 
-        // Função para passar para o próximo slide
-        function nextSlide() {
-            currentIndex = (currentIndex + 1) % totalImages;
-            carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
-            updateDots();
-        }
+        // Auto slide every 3 seconds
+        setInterval(() => {
+            moveSlide(1);
+        }, 3000);
 
-        // Iniciar carrossel automático (muda a cada 3 segundos)
-        setInterval(nextSlide, 3000);
+        // Inicializa o carrossel na primeira imagem real
+        document.getElementById('carousel').style.transform = `translateX(-${currentIndex * 100}%)`;
     </script>
 </div>
 </div>
