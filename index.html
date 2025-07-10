@@ -595,7 +595,7 @@
 
 	<h2 class="section-title">O que dizem sobre nós</h2>
 
-  <style>
+   <style>
         * {
             margin: 0;
             padding: 0;
@@ -604,9 +604,9 @@
 
         .carousel-container {
             width: 100%;
-            max-width: 640px;
+            max-width: 960px;
             max-height: 360px;
-            margin: 50px auto 50px auto;
+            margin: 50px auto;
             overflow: hidden;
             position: relative;
         }
@@ -617,7 +617,7 @@
         }
 
         .carousel img {
-            width: 100%;
+            width: 33.33%;
             max-height: 360px;
             object-fit: contain;
             flex-shrink: 0;
@@ -625,7 +625,7 @@
 
         @media screen and (max-width: 600px) {
             .carousel-container {
-                max-width: 320px;
+                max-width: 480px;
                 max-height: 180px;
             }
 
@@ -638,7 +638,7 @@
             text-align: center;
             margin-top: 20px;
             width: 100%;
-            max-width: 640px;
+            max-width: 960px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -661,7 +661,11 @@
 <body>
     <div class="carousel-container">
         <div class="carousel" id="carousel">
-            <img src="IMAGEM R.png" alt="IMAGEM R"> <!-- Clone da última imagem -->
+            <!-- Clones do último grupo (P,Q,R) -->
+            <img src="IMAGEM P.png" alt="IMAGEM P">
+            <img src="IMAGEM Q.png" alt="IMAGEM Q">
+            <img src="IMAGEM R.png" alt="IMAGEM R">
+            <!-- Grupos reais -->
             <img src="IMAGEM K.png" alt="IMAGEM K">
             <img src="IMAGEM L.png" alt="IMAGEM L">
             <img src="IMAGEM M.png" alt="IMAGEM M">
@@ -670,7 +674,26 @@
             <img src="IMAGEM P.png" alt="IMAGEM P">
             <img src="IMAGEM Q.png" alt="IMAGEM Q">
             <img src="IMAGEM R.png" alt="IMAGEM R">
-            <img src="IMAGEM K.png" alt="IMAGEM K"> <!-- Clone da primeira imagem -->
+            <img src="IMAGEM K.png" alt="IMAGEM K">
+            <img src="IMAGEM L.png" alt="IMAGEM L">
+            <img src="IMAGEM M.png" alt="IMAGEM M">
+            <img src="IMAGEM N.png" alt="IMAGEM N">
+            <img src="IMAGEM O.png" alt="IMAGEM O">
+            <img src="IMAGEM P.png" alt="IMAGEM P">
+            <img src="IMAGEM Q.png" alt="IMAGEM Q">
+            <img src="IMAGEM R.png" alt="IMAGEM R">
+            <img src="IMAGEM K.png" alt="IMAGEM K">
+            <img src="IMAGEM L.png" alt="IMAGEM L">
+            <img src="IMAGEM M.png" alt="IMAGEM M">
+            <img src="IMAGEM N.png" alt="IMAGEM N">
+            <img src="IMAGEM O.png" alt="IMAGEM O">
+            <img src="IMAGEM P.png" alt="IMAGEM P">
+            <img src="IMAGEM Q.png" alt="IMAGEM Q">
+            <img src="IMAGEM R.png" alt="IMAGEM R">
+            <!-- Clones do primeiro grupo (K,L,M) -->
+            <img src="IMAGEM K.png" alt="IMAGEM K">
+            <img src="IMAGEM L.png" alt="IMAGEM L">
+            <img src="IMAGEM M.png" alt="IMAGEM M">
         </div>
         <div class="dots" id="dots"></div>
     </div>
@@ -680,11 +703,12 @@
         const dotsContainer = document.getElementById('dots');
         const images = carousel.getElementsByTagName('img');
         const totalImages = images.length;
-        const realImagesCount = totalImages - 2; // Exclui os clones
-        let currentIndex = 1; // Começa na primeira imagem real (após o clone)
+        const imagesPerSlide = 3;
+        const totalSlides = 8; // 8 grupos (K,L,M → N,O,P → Q,R,K → L,M,N → O,P,Q → R,K,L → M,N,O → P,Q,R)
+        let currentIndex = 1; // Começa no primeiro grupo real (após clones)
 
-        // Criar bolinhas de navegação apenas para as imagens reais
-        for (let i = 0; i < realImagesCount; i++) {
+        // Criar bolinhas de navegação para cada grupo
+        for (let i = 0; i < totalSlides; i++) {
             const dot = document.createElement('span');
             dot.classList.add('dot');
             if (i === 0) dot.classList.add('active');
@@ -694,43 +718,43 @@
 
         const dots = document.getElementsByClassName('dot');
 
-        // Função para ir para um slide específico (índice real, ajustado para o carrossel)
+        // Função para ir para um grupo específico
         function goToSlide(index) {
-            currentIndex = index + 1; // Ajusta para o índice no carrossel (após o clone)
+            currentIndex = index + 1;
             carousel.style.transition = 'transform 0.5s ease-in-out';
             carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
             updateDots();
         }
 
-        // Atualizar bolinhas ativas (baseado nas imagens reais)
+        // Atualizar bolinhas ativas
         function updateDots() {
             for (let i = 0; i < dots.length; i++) {
                 dots[i].classList.toggle('active', i === (currentIndex - 1));
             }
         }
 
-        // Função para passar para o próximo slide
+        // Função para passar para o próximo grupo
         function nextSlide() {
             currentIndex++;
             carousel.style.transition = 'transform 0.5s ease-in-out';
             carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
 
-            // Quando atingir o clone da primeira imagem (última posição)
-            if (currentIndex === totalImages - 1) {
+            // Quando atingir o último grupo (clones do primeiro grupo)
+            if (currentIndex === totalSlides + 1) {
                 setTimeout(() => {
                     carousel.style.transition = 'none';
-                    currentIndex = 1; // Pula para a primeira imagem real
+                    currentIndex = 1; // Pula para o primeiro grupo real
                     carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
-                }, 500); // Tempo igual à duração da transição
+                }, 500);
             }
 
-            // Quando atingir o clone da última imagem (primeira posição)
+            // Quando atingir o grupo de clones iniciais
             if (currentIndex === 0) {
                 setTimeout(() => {
                     carousel.style.transition = 'none';
-                    currentIndex = realImagesCount; // Pula para a última imagem real
+                    currentIndex = totalSlides; // Pula para o último grupo real
                     carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
-                }, 500); // Tempo igual à duração da transição
+                }, 500);
             }
 
             updateDots();
@@ -739,7 +763,7 @@
         // Iniciar carrossel automático (muda a cada 3 segundos)
         setInterval(nextSlide, 3000);
 
-        // Inicializa o carrossel na primeira imagem real
+        // Inicializa o carrossel no primeiro grupo real
         carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
     </script>
 </div>
