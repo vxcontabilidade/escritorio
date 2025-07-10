@@ -6,7 +6,7 @@
   <title>VX Contabilidade</title>
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <style>
+   <style>
         * {
             margin: 0;
             padding: 0;
@@ -160,7 +160,7 @@
             flex-direction: column;
             align-items: center;
             flex-grow: 1;
-            padding-top: 80px; /* Space for fixed header */
+            padding-top: 80px;
         }
 
         .hero-image {
@@ -330,7 +330,7 @@
             <img src="vxlogo.png" alt="VX Contabilidade Logo">
         </div>
         <div class="site-name">VX Contabilidade</div>
-        <div class="hamburger" onclick toggleMenu() aria-label="Toggle Menu">
+        <div class="hamburger" onclick="toggleMenu()" aria-label="Toggle Menu">
             <span></span>
             <span></span>
             <span></span>
@@ -360,10 +360,10 @@
             <a href="#contato" onclick="showSection('contato')" class="hero-cta">Entre em Contato</a>
             <div class="welcome-message">
                 <h2>Seja muito bem-vindo(a)!</h2>
-                <p style="text-align: justify;">Sou especialista em contabilidade para MEIs e empresas do Simples Nacional, e estou aqui para oferecer um atendimento próximo, descomplicado e totalmente focado nas necessidades do seu negócio.</p>
-                <p style="text-align: justify;">Meu compromisso é facilitar a sua rotina contábil, garantir conformidade com as obrigações legais e ajudar você a crescer com segurança e tranquilidade.</p>
-                <p style="text-align: justify;">Conte comigo para cuidar da parte contábil, enquanto você se dedica ao que faz de melhor: empreender!</p>
-                <p style="text-align: justify;">Será um prazer caminhar ao seu lado nessa jornada.</p>
+                <p>Sou especialista em contabilidade para MEIs e empresas do Simples Nacional, e estou aqui para oferecer um atendimento próximo, descomplicado e totalmente focado nas necessidades do seu negócio.</p>
+                <p>Meu compromisso é facilitar a sua rotina contábil, garantir conformidade com as obrigações legais e ajudar você a crescer com segurança e tranquilidade.</p>
+                <p>Conte comigo para cuidar da parte contábil, enquanto você se dedica ao que faz de melhor: empreender!</p>
+                <p>Será um prazer caminhar ao seu lado nessa jornada.</p>
             </div>
         </section>
         <!-- Placeholder for other sections -->
@@ -390,7 +390,7 @@
     </footer>
 
     <script>
-        // Placeholder JavaScript to preserve automations
+        // JavaScript to handle menu toggle and section navigation
         function toggleMenu() {
             const mobileMenu = document.querySelector('.mobile-menu');
             mobileMenu.classList.toggle('active');
@@ -403,6 +403,11 @@
             });
             // Show the selected section
             document.getElementById(sectionId).style.display = 'block';
+            // Close mobile menu if open
+            const mobileMenu = document.querySelector('.mobile-menu');
+            if (mobileMenu.classList.contains('active')) {
+                mobileMenu.classList.remove('active');
+            }
         }
 
         // Initialize by showing the 'inicio' section
