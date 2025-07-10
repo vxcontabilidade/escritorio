@@ -604,8 +604,8 @@
 
         .carousel-container {
             width: 100%;
-            max-width: 640px; /* Reduzido de 800px para 640px (80%) */
-            max-height: 360px; /* Ajustado proporcionalmente para manter proporção */
+            max-width: 640px;
+            max-height: 360px;
             margin: 50px auto 50px auto;
             overflow: hidden;
             position: relative;
@@ -618,28 +618,27 @@
 
         .carousel img {
             width: 100%;
-            max-height: 360px; /* Ajustado para o contêiner */
-            object-fit: contain; /* Mantém proporção sem cortar */
+            max-height: 360px;
+            object-fit: contain;
             flex-shrink: 0;
         }
 
-        /* Media query para dispositivos móveis */
         @media screen and (max-width: 600px) {
             .carousel-container {
-                max-width: 320px; /* Reduzido proporcionalmente para mobile */
-                max-height: 180px; /* Ajustado proporcionalmente */
+                max-width: 320px;
+                max-height: 180px;
             }
 
             .carousel img {
-                max-height: 180px; /* Ajustado para mobile */
+                max-height: 180px;
             }
         }
 
         .dots {
             text-align: center;
-            margin-top: 20px; /* Aumentado para garantir que as bolinhas fiquem abaixo */
+            margin-top: 20px;
             width: 100%;
-            max-width: 640px; /* Alinhado com o contêiner */
+            max-width: 640px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -658,33 +657,34 @@
             background-color: #717171;
         }
     </style>
-
-<div class="carousel-container">
+</head>
+<body>
+    <div class="carousel-container">
         <div class="carousel" id="carousel">
+            <img src="IMAGEM R.png" alt="IMAGEM R"> <!-- Clone da última imagem -->
             <img src="IMAGEM K.png" alt="IMAGEM K">
-	    <img src="IMAGEM L.png" alt="IMAGEM L">
- 	    <img src="IMAGEM M.png" alt="IMAGEM M">
-	    <img src="IMAGEM N.png" alt="IMAGEM N">
-	    <img src="IMAGEM O.png" alt="IMAGEM O">
-	    <img src="IMAGEM P.png" alt="IMAGEM P">
-	    <img src="IMAGEM Q.png" alt="IMAGEM Q">
-	    <img src="IMAGEM R.png" alt="IMAGEM R">
-        
+            <img src="IMAGEM L.png" alt="IMAGEM L">
+            <img src="IMAGEM M.png" alt="IMAGEM M">
+            <img src="IMAGEM N.png" alt="IMAGEM N">
+            <img src="IMAGEM O.png" alt="IMAGEM O">
+            <img src="IMAGEM P.png" alt="IMAGEM P">
+            <img src="IMAGEM Q.png" alt="IMAGEM Q">
+            <img src="IMAGEM R.png" alt="IMAGEM R">
+            <img src="IMAGEM K.png" alt="IMAGEM K"> <!-- Clone da primeira imagem -->
         </div>
         <div class="dots" id="dots"></div>
     </div>
 
-    <div class="dots" id="dots"></div>
-
-        <script>
+    <script>
         const carousel = document.getElementById('carousel');
         const dotsContainer = document.getElementById('dots');
         const images = carousel.getElementsByTagName('img');
-        let currentIndex = 0;
         const totalImages = images.length;
+        const realImagesCount = totalImages - 2; // Exclui os clones
+        let currentIndex = 1; // Começa na primeira imagem real (após o clone)
 
-        // Criar bolinhas de navegação
-        for (let i = 0; i < totalImages; i++) {
+        // Criar bolinhas de navegação apenas para as imagens reais
+        for (let i = 0; i < realImagesCount; i++) {
             const dot = document.createElement('span');
             dot.classList.add('dot');
             if (i === 0) dot.classList.add('active');
@@ -694,29 +694,53 @@
 
         const dots = document.getElementsByClassName('dot');
 
-        // Função para ir para um slide específico
+        // Função para ir para um slide específico (índice real, ajustado para o carrossel)
         function goToSlide(index) {
-            currentIndex = index;
-            carousel.style.transform = `translateX(-${index * 100}%)`;
+            currentIndex = index + 1; // Ajusta para o índice no carrossel (após o clone)
+            carousel.style.transition = 'transform 0.5s ease-in-out';
+            carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
             updateDots();
         }
 
-        // Atualizar bolinhas ativas
+        // Atualizar bolinhas ativas (baseado nas imagens reais)
         function updateDots() {
             for (let i = 0; i < dots.length; i++) {
-                dots[i].classList.toggle('active', i === currentIndex);
+                dots[i].classList.toggle('active', i === (currentIndex - 1));
             }
         }
 
         // Função para passar para o próximo slide
         function nextSlide() {
-            currentIndex = (currentIndex + 1) % totalImages;
+            currentIndex++;
+            carousel.style.transition = 'transform 0.5s ease-in-out';
             carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+            // Quando atingir o clone da primeira imagem (última posição)
+            if (currentIndex === totalImages - 1) {
+                setTimeout(() => {
+                    carousel.style.transition = 'none';
+                    currentIndex = 1; // Pula para a primeira imagem real
+                    carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+                }, 500); // Tempo igual à duração da transição
+            }
+
+            // Quando atingir o clone da última imagem (primeira posição)
+            if (currentIndex === 0) {
+                setTimeout(() => {
+                    carousel.style.transition = 'none';
+                    currentIndex = realImagesCount; // Pula para a última imagem real
+                    carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+                }, 500); // Tempo igual à duração da transição
+            }
+
             updateDots();
         }
 
         // Iniciar carrossel automático (muda a cada 3 segundos)
         setInterval(nextSlide, 3000);
+
+        // Inicializa o carrossel na primeira imagem real
+        carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
     </script>
 </div>
 </div>
