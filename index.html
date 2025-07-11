@@ -127,33 +127,29 @@
     }
 
     .hero-image {
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
+      width: 100vw;
+      margin: 0;
+      padding: 0;
+      position: relative;
     }
 
     .hero-image img {
-      width: 100%;
+      width: 100vw;
       height: auto;
       display: block;
+      object-fit: cover;
+      animation: fadeIn 1.5s ease-in-out forwards;
     }
 
-    /* Estilos para desktop (telas maiores que 768px) */
-    @media (min-width: 769px) {
-      .hero-image img {
-        width: 100%;
-        max-height: 500px;
-        object-fit: cover;
-	      }
-    }
-
-    /* Estilos para mobile (telas até 768px) */
-    @media (max-width: 768px) {
-      .hero-image img {
-        width: 100%;
-        max-height: 300px;
-        object-fit: cover;
-	      }
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .title {
@@ -162,7 +158,9 @@
       font-size: 36px;
       font-family: 'Roboto', Arial, sans-serif;
       font-weight: 700;
-      margin: 40px 0;
+      margin: 40px 20px;
+      max-width: 100%;
+      box-sizing: border-box;
     }
 
     .subtitle {
@@ -171,7 +169,9 @@
       font-size: 24px;
       font-family: 'Open Sans', Arial, sans-serif;
       font-weight: 400;
-      margin-bottom: 40px;
+      margin: 0 20px 40px;
+      max-width: 100%;
+      box-sizing: border-box;
     }
 
     /* Estilos para desktop (telas maiores que 768px) */
@@ -181,6 +181,7 @@
         font-family: 'Montserrat', Arial, sans-serif;
         font-weight: 700;
         line-height: 1.2;
+        margin: 40px 20px;
       }
 
       .subtitle {
@@ -188,6 +189,7 @@
         font-family: 'Lora', Arial, sans-serif;
         font-weight: 400;
         line-height: 1.4;
+        margin: 0 20px 40px;
       }
     }
 
@@ -198,6 +200,7 @@
         font-family: 'Roboto', Arial, sans-serif;
         font-weight: 600;
         line-height: 1.3;
+        margin: 40px 10px;
       }
 
       .subtitle {
@@ -205,6 +208,7 @@
         font-family: 'Open Sans', Arial, sans-serif;
         font-weight: 400;
         line-height: 1.5;
+        margin: 0 10px 40px;
       }
     }
 
@@ -265,7 +269,8 @@
     .about-section {
       display: flex;
       flex-wrap: wrap;
-      gap: 20px;
+      gap: 20 Parkinson’s Disease: Understanding the Basics
+20px;
       margin-bottom: 40px;
       width: 100%;
       justify-content: center;
@@ -607,10 +612,15 @@
   <main class="main-content">
     <section id="inicio">
       <div class="hero-image">
-        <img src="IMAGEM A.png" alt="Imagem Principal">
+        <img 
+          src="IMAGEM A-lowres.png" 
+          srcset="IMAGEM A-lowres.png 768w, IMAGEM A.png 1920w" 
+          sizes="(max-width: 768px) 100vw, 1920px"
+          alt="Imagem Principal"
+          loading="lazy">
       </div>
-      <h1 class="title">  <p style="text-align: justify;">Contabilidade eficiente para o crescimento da sua empresa!</p></h1>
-      <h2 class="subtitle"><p style="text-align: justify;">MEI e Simples Nacional sem complicações! Abertura de CNPJ-MEI e DASN-SIMEI grátis.</p></h2>
+      <h1 class="title">Contabilidade eficiente para o crescimento da sua empresa!</h1>
+      <h2 class="subtitle">MEI e Simples Nacional sem complicações! Abertura de CNPJ-MEI e DASN-SIMEI grátis.</h2>
       <div class="welcome-message">
         <h2>Seja muito bem-vindo(a)!</h2>
         <p style="text-align: justify;">Sou especialista em contabilidade para MEIs e empresas do Simples Nacional, e estou aqui para oferecer um atendimento próximo, descomplicado e totalmente focado nas necessidades do seu negócio.</p>
@@ -681,7 +691,7 @@
       </div>
       <div class="mission-vision-values">
         <h2 class="section-title">Missão</h2>
-        <p style="text-align: justify;">Oferecer serviços contábeis com ética e transparência, ajudando empreendedores a tomar decisões estratégicas para o sucesso sustentável dos seus negócios.</p>
+        <p style="text-align: justify;">Oferecer serviços contábeis com ética e transparência, ajudando empreendedores a tomando decisões estratégicas para o sucesso sustentável dos seus negócios.</p>
         <h2 class="section-title">Visão</h2>
         <p style="text-align: justify;">Ser referência em contabilidade, construindo confiança e agregando valor com soluções modernas e personalizadas.</p>
         <h2 class="section-title">Valores</h2>
@@ -812,7 +822,9 @@
         <h3>2. Finalidade da Coleta</h3>
         <p style="text-align: justify;">Os dados coletados são utilizados para:</p>
         <ul>
-          <li>Responder às suas solicitações e prestar atendimento personalizado;</li>
+          <li>Responder às suas solicitações e prestar atendimento
+
+ personalizado;</li>
           <li>Enviar comunicações relacionadas aos serviços contratados;</li>
           <li>Cumprir obrigações legais e fiscais;</li>
           <li>Melhorar a funcionalidade e a segurança do nosso site;</li>
