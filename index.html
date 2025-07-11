@@ -130,12 +130,51 @@
       max-width: none;
       margin-left: calc(-50vw + 50%);
       margin-right: calc(-50vw + 50%);
+      position: relative;
+      overflow: hidden;
     }
 
-    .hero-image img {
-      width: 100vw;
+    .carousel-container {
+      width: 100%;
       height: auto;
-      display: block;
+      position: relative;
+    }
+
+    .carousel {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel img {
+      width: 33.33%; /* Cada imagem ocupa 1/3 da largura para mostrar 3 por vez */
+      height: auto;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(44, 120, 115, 0.9);
+      color: #fff;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      font-size: 24px;
+      z-index: 10;
+    }
+
+    .carousel-btn.left {
+      left: 10px;
+    }
+
+    .carousel-btn.right {
+      right: 10px;
+    }
+
+    .carousel-btn:hover {
+      background-color: rgba(44, 120, 115, 1);
     }
 
     .title {
@@ -471,7 +510,15 @@
       .privacy-content p {
         font-size: 14px;
       }
-         
+
+      .carousel img {
+        width: 100%; /* Mostrar 1 imagem por vez em telas menores */
+      }
+
+      .carousel-btn {
+        padding: 8px;
+        font-size: 20px;
+      }
     }
   </style>
 </head>
@@ -505,9 +552,22 @@
   <main class="main-content">
     <section id="inicio">
       <div class="hero-image">
-        <img src="IMAGEM A.png" alt="Imagem Principal">
+        <div class="carousel-container">
+          <div class="carousel" id="hero-carousel">
+            <img src="IMAGEM AA.png" alt="Imagem AA">
+            <img src="IMAGEM AB.png" alt="Imagem AB">
+            <img src="IMAGEM AC.png" alt="Imagem AC">
+            <img src="IMAGEM AD.png" alt="Imagem AD">
+            <img src="IMAGEM AE.png" alt="Imagem AE">
+            <img src="IMAGEM AA.png" alt="Imagem AA"> <!-- Duplicada para loop -->
+            <img src="IMAGEM AB.png" alt="Imagem AB"> <!-- Duplicada para loop -->
+            <img src="IMAGEM AC.png" alt="Imagem AC"> <!-- Duplicada para loop -->
+          </div>
+          <button class="carousel-btn left" onclick="prevHeroSlide()">&#10094;</button>
+          <button class="carousel-btn right" onclick="nextHeroSlide()">&#10095;</button>
+        </div>
       </div>
-      <h1 class="title">  <p>Contabilidade eficiente para o crescimento da sua empresa!</p></h1>
+      <h1 class="title"><p>Contabilidade eficiente para o crescimento da sua empresa!</p></h1>
       <h2 class="subtitle"><p>MEI e Simples Nacional sem complicações! Abertura de CNPJ-MEI e DASN-SIMEI grátis.</p></h2>
       <div class="welcome-message">
         <h2>Seja muito bem-vindo(a)!</h2>
@@ -553,13 +613,12 @@
           <h3>Cálculos Trabalhistas</h3>
           <p style="text-align: justify;">Realizamos cálculos de rescisões, horas extras, férias, 13º, FGTS e outras verbas trabalhistas. Elaboramos laudos claros e ágeis para processos judiciais e extrajudiciais.</p>
         </div>
-<div class="image-card">
+        <div class="image-card">
           <img src="IMAGEM I.png" alt="BPO Financeiro">
           <h3>BPO Financeiro</h3>
           <p style="text-align: justify;">O nosso BPO Financeiro ajuda empreendedores a organizarem suas finanças sem precisar contratar equipe interna. Cuidamos da rotina financeira com eficiência e discrição. Inclui controle de contas a pagar e receber, emissão de boletos e notas fiscais. Também realizamos fluxo de caixa mensal e conciliação bancária. Oferecemos cobrança ativa simples para reduzir a inadimplência.</p>
         </div>
-
-<div class="image-card">
+        <div class="image-card">
           <img src="IMAGEM J.png" alt="Regularização de Débitos Tributários">
           <h3>Regularização de Débitos Tributários</h3>
           <p style="text-align: justify;">Precisa regularizar débitos tributários como pessoa física ou jurídica? Nós cuidamos de todo o processo com segurança, agilidade e sigilo. Evite multas, bloqueios e restrições no CPF ou CNPJ. Analisamos sua situação e negociamos as melhores condições com a Receita Federal e demais órgãos. Atendemos MEI, Simples Nacional e também contribuinte pessoa física.</p>
@@ -593,144 +652,69 @@
         </div>
       </div>
 
-	<h2 class="section-title">O que dizem sobre nós</h2>
-
-  <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        .carousel-container {
-            width: 100%;
-            max-width: 640px;
-            max-height: 360px;
-            margin: 50px auto;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .carousel {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-        }
-
-        .carousel img {
-            width: 50%; /* Cada imagem ocupa 50% da largura para mostrar 2 por vez */
-            max-height: 360px;
-            object-fit: contain;
-            flex-shrink: 0;
-        }
-
-        /* Media query para dispositivos móveis */
-        @media screen and (max-width: 600px) {
-            .carousel-container {
-                max-width: 320px;
-                max-height: 180px;
-            }
-
-            .carousel img {
-                max-height: 180px;
-            }
-        }
-
-        .dots {
-            text-align: center;
-            margin-top: 20px;
-            width: 100%;
-            max-width: 640px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .dot {
-            height: 15px;
-            width: 15px;
-            margin: 0 5px;
-            background-color: #2c7873;
-            border-radius: 50%;
-            display: inline-block;
-            cursor: pointer;
-        }
-
-        .dot.active {
-            background-color: #717171;
-        }
-    </style>
-</head>
-<body>
-    <div class="carousel-container">
+      <h2 class="section-title">O que dizem sobre nós</h2>
+      <div class="carousel-container">
         <div class="carousel" id="carousel">
-            <img src="IMAGEM K.png" alt="IMAGEM K">
-            <img src="IMAGEM L.png" alt="IMAGEM L">
-            <img src="IMAGEM M.png" alt="IMAGEM M">
-            <img src="IMAGEM N.png" alt="IMAGEM N">
-            <img src="IMAGEM O.png" alt="IMAGEM O">
-            <img src="IMAGEM P.png" alt="IMAGEM P">
-            <img src="IMAGEM Q.png" alt="IMAGEM Q">
-            <img src="IMAGEM R.png" alt="IMAGEM R">
-            <!-- Duplicar as primeiras imagens para loop contínuo -->
-            <img src="IMAGEM K.png" alt="IMAGEM K">
-            <img src="IMAGEM L.png" alt="IMAGEM L">
+          <img src="IMAGEM K.png" alt="IMAGEM K">
+          <img src="IMAGEM L.png" alt="IMAGEM L">
+          <img src="IMAGEM M.png" alt="IMAGEM M">
+          <img src="IMAGEM N.png" alt="IMAGEM N">
+          <img src="IMAGEM O.png" alt="IMAGEM O">
+          <img src="IMAGEM P.png" alt="IMAGEM P">
+          <img src="IMAGEM Q.png" alt="IMAGEM Q">
+          <img src="IMAGEM R.png" alt="IMAGEM R">
+          <img src="IMAGEM K.png" alt="IMAGEM K">
+          <img src="IMAGEM L.png" alt="IMAGEM L">
         </div>
         <div class="dots" id="dots"></div>
-    </div>
+      </div>
 
-    <script>
+      <script>
         const carousel = document.getElementById('carousel');
         const dotsContainer = document.getElementById('dots');
         const images = carousel.getElementsByTagName('img');
         let currentIndex = 0;
-        const imagesPerView = 2; // Mostrar 2 imagens por vez
-        const totalPairs = 4; // Total de pares (K,L), (M,N), (O,P), (Q,R)
+        const imagesPerView = 2;
+        const totalPairs = 4;
 
-        // Criar bolinhas de navegação (uma por par)
         for (let i = 0; i < totalPairs; i++) {
-            const dot = document.createElement('span');
-            dot.classList.add('dot');
-            if (i === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => goToSlide(i));
-            dotsContainer.appendChild(dot);
+          const dot = document.createElement('span');
+          dot.classList.add('dot');
+          if (i === 0) dot.classList.add('active');
+          dot.addEventListener('click', () => goToSlide(i));
+          dotsContainer.appendChild(dot);
         }
 
         const dots = document.getElementsByClassName('dot');
 
-        // Função para ir para um par específico
         function goToSlide(index) {
-            currentIndex = index;
-            carousel.style.transform = `translateX(-${index * 100}%)`;
-            updateDots();
+          currentIndex = index;
+          carousel.style.transform = `translateX(-${index * 100}%)`;
+          updateDots();
         }
 
-        // Atualizar bolinhas ativas
         function updateDots() {
-            for (let i = 0; i < dots.length; i++) {
-                dots[i].classList.toggle('active', i === currentIndex);
-            }
+          for (let i = 0; i < dots.length; i++) {
+            dots[i].classList.toggle('active', i === currentIndex);
+          }
         }
 
-        // Função para passar para o próximo par
         function nextSlide() {
-            currentIndex++;
-            if (currentIndex >= totalPairs) {
-                currentIndex = 0;
-                carousel.style.transition = 'none'; // Desativa transição para reset
-                carousel.style.transform = `translateX(0%)`;
-                // Forçar reflow para reiniciar a transição
-                carousel.offsetHeight;
-                carousel.style.transition = 'transform 0.5s ease-in-out';
-            } else {
-                carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
-            }
-            updateDots();
+          currentIndex++;
+          if (currentIndex >= totalPairs) {
+            currentIndex = 0;
+            carousel.style.transition = 'none';
+            carousel.style.transform = `translateX(0%)`;
+            carousel.offsetHeight;
+            carousel.style.transition = 'transform 0.5s ease-in-out';
+          } else {
+            carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+          }
+          updateDots();
         }
 
-        // Iniciar carrossel automático (muda a cada 3 segundos)
         setInterval(nextSlide, 3000);
-    </script>
-</div>
-</div>
+      </script>
 
       <div class="footer">
         <p>© 2025 VX Contabilidade. Todos os direitos reservados.</p>
@@ -854,11 +838,51 @@
       });
     }
 
+    // Hero Carousel
+    const heroCarousel = document.getElementById('hero-carousel');
+    let heroIndex = 0;
+    const heroImagesPerView = window.innerWidth <= 768 ? 1 : 3; // 1 imagem em mobile, 3 em desktop
+    const totalHeroImages = 5; // AA, AB, AC, AD, AE
+    const totalHeroSlides = Math.ceil(totalHeroImages / heroImagesPerView);
+
+    function updateHeroSlide() {
+      const offset = heroIndex * (100 / heroImagesPerView);
+      heroCarousel.style.transform = `translateX(-${offset}%)`;
+    }
+
+    function nextHeroSlide() {
+      heroIndex++;
+      if (heroIndex >= totalHeroSlides) {
+        heroIndex = 0;
+        heroCarousel.style.transition = 'none';
+        updateHeroSlide();
+        heroCarousel.offsetHeight; // Forçar reflow
+        heroCarousel.style.transition = 'transform 0.5s ease-in-out';
+      } else {
+        updateHeroSlide();
+      }
+    }
+
+    function prevHeroSlide() {
+      heroIndex--;
+      if (heroIndex < 0) {
+        heroIndex = totalHeroSlides - 1;
+        heroCarousel.style.transition = 'none';
+        updateHeroSlide();
+        heroCarousel.offsetHeight; // Forçar reflow
+        heroCarousel.style.transition = 'transform 0.5s ease-in-out';
+      } else {
+        updateHeroSlide();
+      }
+    }
+
+    // Iniciar carrossel automático
+    setInterval(nextHeroSlide, 3000);
+
     // Initialize EmailJS with your public key
     emailjs.init("s0FfO34iE-17Lz7Wc");
 
     function sendEmail() {
-      // Verify reCAPTCHA
       const recaptchaResponse = grecaptcha.getResponse();
       if (!recaptchaResponse) {
         alert('Por favor, complete o reCAPTCHA para verificar que você não é um robô.');
@@ -887,7 +911,6 @@
         });
     }
 
-    // Show section based on URL hash or default to 'inicio'
     window.addEventListener('load', () => {
       const hash = window.location.hash.replace('#', '');
       if (['inicio', 'servicos', 'sobre', 'contato', 'politica-privacidade'].includes(hash)) {
