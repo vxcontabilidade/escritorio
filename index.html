@@ -1,9 +1,87 @@
-<!DOCTYPE html>
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VX Contabilidade</title>
+  <title>Contabilidade em São Gonçalo | MEI e Simples Nacional</title>
+  <meta name="description" content="VX Contabilidade em São Gonçalo: serviços de contabilidade para MEI, Simples Nacional, cálculos trabalhistas, imposto de renda e regularização de débitos tributários.">
+  <meta name="keywords" content="contabilidade, contabilidade São Gonçalo, MEI, Simples Nacional, cálculos trabalhistas">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.vxcontabilidade.com.br">
+  <meta property="og:title" content="VX Contabilidade | Contabilidade em São Gonçalo">
+  <meta property="og:description" content="Serviços de contabilidade para MEI, Simples Nacional e cálculos trabalhistas em São Gonçalo, RJ.">
+  <meta property="og:image" content="https://www.vxcontabilidade.com.br/vxlogo.png">
+  <meta property="og:url" content="https://www.vxcontabilidade.com.br">
+  <meta property="og:type" content="website">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AccountingService",
+    "name": "VX Contabilidade",
+    "description": "Serviços de contabilidade em São Gonçalo para MEI, Simples Nacional, cálculos trabalhistas e regularização de débitos tributários.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Travessa Joaquim Seabra, nº 42, Nova Cidade",
+      "addressLocality": "São Gonçalo",
+      "addressRegion": "RJ",
+      "postalCode": "24456-080",
+      "addressCountry": "BR"
+    },
+    "telephone": "+5521985430782",
+    "url": "https://www.vxcontabilidade.com.br",
+    "openingHours": "Mo-Fr 09:00-18:00",
+    "areaServed": {
+      "@type": "City",
+      "name": "São Gonçalo"
+    },
+    "serviceType": [
+      "Contabilidade para MEI",
+      "Simples Nacional",
+      "Cálculos Trabalhistas",
+      "Imposto de Renda",
+      "BPO Financeiro"
+    ]
+  }
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <style>
@@ -146,14 +224,14 @@
     }
 
     .hero-carousel img {
-      width: 33.33%; /* Cada imagem ocupa 1/3 da largura para mostrar 3 por vez */
+      width: 33.33%;
       height: auto;
       object-fit: cover;
       flex-shrink: 0;
     }
 
     .carousel-btn {
-      display: none; /* Botões do carrossel de início invisíveis */
+      display: none;
     }
 
     .title {
@@ -384,20 +462,6 @@
       margin: 0 auto;
     }
 
-    .section-footer {
-      text-align: center;
-      padding: 20px;
-      background-color: #2c7873;
-      color: #f7e8a0;
-      width: 100vw;
-      margin-left: calc(-50vw + 50%);
-      margin-right: calc(-50vw + 50%);
-    }
-
-    .section-footer p {
-      text-align: center;
-    }
-
     .footer {
       text-align: center;
       padding: 20px;
@@ -439,7 +503,7 @@
     }
 
     .carousel img {
-      width: 50%; /* Cada imagem ocupa 50% da largura para mostrar 2 por vez */
+      width: 50%;
       max-height: 360px;
       object-fit: contain;
       flex-shrink: 0;
@@ -471,31 +535,31 @@
     /* Desktop-specific styles for services section */
     @media (min-width: 769px) {
       .image-grid {
-        grid-template-columns: repeat(2, 1fr); /* Mostrar 2 serviços por linha */
-        max-width: 100%; /* Aproveitar mais a largura da página */
-        gap: 100px; /* Aumentar o espaço entre os itens */
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 100%;
+        gap: 100px;
       }
 
       .image-card {
         display: flex;
-        flex-direction: column; /* Alterado para coluna para títulos e descrições ficarem abaixo */
-        align-items: center; /* Centralizar conteúdo */
-        text-align: center; /* Centralizar texto */
-        max-width: none; /* Remover limitação de largura */
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        max-width: none;
       }
 
       .image-card img {
-        max-width: 400px; /* Ajustar tamanho da imagem para desktop */
-        margin-bottom: 10px; /* Espaço abaixo da imagem */
+        max-width: 400px;
+        margin-bottom: 10px;
       }
 
       .image-card h3 {
-        font-size: 22px; /* Aumentar tamanho do título */
-        margin: 10px 0; /* Ajustar margem */
+        font-size: 22px;
+        margin: 10px 0;
       }
 
       .image-card p {
-        max-width: none; /* Remover limitação de largura do texto */
+        max-width: none;
         font-size: 16px;
       }
     }
@@ -580,7 +644,7 @@
       }
 
       .hero-carousel img {
-        width: 100%; /* Mostrar 1 imagem por vez em telas menores */
+        width: 100%;
       }
 
       .carousel-btn {
@@ -594,7 +658,7 @@
   <header class="header">
     <div class="site-name">VX Contabilidade</div>
     <div class="logo">
-      <img src="vxlogo.png" alt="VX Contabilidade Logo">
+      <img src="vxlogo.png" alt="VX Contabilidade - Contador em São Gonçalo" loading="lazy">
     </div>
     <div class="hamburger" onclick="toggleMenu()">
       <span></span>
@@ -621,130 +685,117 @@
       <div class="hero-image">
         <div class="hero-carousel-container">
           <div class="hero-carousel" id="hero-carousel">
-            <img src="IMAGEM AA.png" alt="Imagem AA">
-            <img src="IMAGEM AB.png" alt="Imagem AB">
-            <img src="IMAGEM AC.png" alt="Imagem AC">
-            <img src="IMAGEM AD.png" alt="Imagem AD">
-            <img src="IMAGEM AE.png" alt="Imagem AE">
-            <img src="IMAGEM AF.png" alt="Imagem AF">
-    	         
-	   </div>
+            <img src="IMAGEM AA.png" alt="Contabilidade para MEI em São Gonçalo" loading="lazy">
+            <img src="IMAGEM AB.png" alt="Simples Nacional em São Gonçalo" loading="lazy">
+            <img src="IMAGEM AC.png" alt="Cálculos trabalhistas em São Gonçalo" loading="lazy">
+            <img src="IMAGEM AD.png" alt="Imposto de Renda para MEI" loading="lazy">
+            <img src="IMAGEM AE.png" alt="BPO Financeiro em São Gonçalo" loading="lazy">
+            <img src="IMAGEM AF.png" alt="Regularização de débitos tributários" loading="lazy">
+          </div>
           <button class="carousel-btn left" onclick="prevHeroSlide()">❮</button>
           <button class="carousel-btn right" onclick="nextHeroSlide()">❯</button>
         </div>
       </div>
-      <h1 class="title"><p>Contabilidade eficiente para o crescimento da sua empresa!</p></h1>
-      <h2 class="subtitle"><p>MEI e Simples Nacional sem complicações! Abertura de CNPJ-MEI e DASN-SIMEI grátis.</p></h2>
+      <h1 class="title">Contabilidade em São Gonçalo para MEI e Simples Nacional</h1>
+      <h2 class="subtitle">Serviços contábeis eficientes para o crescimento da sua empresa</h2>
       <div class="welcome-message">
-        <h2>Seja muito bem-vindo(a)!</h2>
-        <p style="text-align: justify;">Sou especialista em contabilidade para MEIs e empresas do Simples Nacional, e estou aqui para oferecer um atendimento próximo, descomplicado e totalmente focado nas necessidades do seu negócio.</p>
-        <p style="text-align: justify;">Meu compromisso é facilitar a sua rotina contábil, garantir conformidade com as obrigações legais e ajudar você a crescer com segurança e tranquilidade.</p>
-        <p style="text-align: justify;">Conte comigo para cuidar da parte contábil, enquanto você se dedica ao que faz de melhor: empreender!</p>
-        <p style="text-align: justify;">Será um prazer caminhar ao seu lado nessa jornada.</p>
-      </div>
-<h2 class="subtitle"><p style="color: #1e263700;">MEI, Simples Nacional,Abertura de CNPJ-MEI, Cálculos trabalhistas.</p></h2>
-      <div class="section-footer">
-        <p>© 2025 VX Contabilidade. Todos os direitos reservados.</p>
+        <h3>Seja bem-vindo(a) à VX Contabilidade!</h3>
+        <p style="text-align: justify;">Somos especialistas em <strong>contabilidade para MEI</strong> e <strong>Simples Nacional</strong> em São Gonçalo, RJ. Oferecemos serviços como abertura de MEI grátis, gestão de DAS, <strong>cálculos trabalhistas</strong> e regularização de débitos tributários.</p>
+        <p style="text-align: justify;">Nosso compromisso é facilitar sua rotina contábil, garantir conformidade com as obrigações legais e ajudar você a crescer com segurança e tranquilidade.</p>
+        <p style="text-align: justify;">Conte conosco para cuidar da parte contábil, enquanto você se dedica ao que faz de melhor: empreender!</p>
+        <p>Será um prazer caminhar ao seu lado nessa jornada. <a href="#contato" onclick="showSection('contato')">Entre em contato</a>!</p>
       </div>
     </section>
 
     <section id="servicos" style="display: none;">
+      <h2 class="section-title">Serviços de Contabilidade em São Gonçalo</h2>
       <div class="image-grid">
         <div class="image-card">
-          <img src="IMAGEM B.png" alt="Abertura de MEI">
+          <img src="IMAGEM B.png" alt="Abertura de MEI grátis em São Gonçalo" loading="lazy">
           <h3>Abertura de MEI Grátis</h3>
-          <p style="text-align: justify;">Formalize o seu negócio como MEI sem custos! Obtenha CNPJ, emita notas fiscais, acesse crédito empresarial e tenha direitos previdenciários com a nossa assessoria completa.</p>
+          <p>Formalize o seu negócio como MEI sem custos! Obtenha CNPJ, emita notas fiscais, acesse crédito empresarial e tenha direitos previdenciários com a nossa assessoria completa.</p>
         </div>
         <div class="image-card">
-          <img src="IMAGEM C.png" alt="Gestão de DAS">
+          <img src="IMAGEM C.png" alt="Gestão de DAS e DASN-SIMEI para MEI" loading="lazy">
           <h3>Gestão de DAS e DASN-SIMEI</h3>
-          <p style="text-align: justify;">Gerenciamos o seu DAS mensalmente e entregamos a Declaração Anual dentro do prazo legal. Fornecemos planilhas de gestão da lucratividade e gestão do estoque para o acompanhamento e crescimento do seu negócio.</p>
+          <p>Gerenciamos o seu DAS mensalmente e entregamos a Declaração Anual dentro do prazo legal. Fornecemos planilhas de gestão da lucratividade e gestão do estoque para o acompanhamento e crescimento do seu negócio.</p>
         </div>
         <div class="image-card">
-          <img src="IMAGEM D.png" alt="Simples Nacional">
+          <img src="IMAGEM D.png" alt="Contabilidade Simples Nacional em São Gonçalo" loading="lazy">
           <h3>Simples Nacional</h3>
-          <p style="text-align: justify;">Contabilidade completa para empresas do Simples Nacional com apuração de impostos, folha de pagamento e consultoria tributária. Foco na conformidade e crescimento do seu negócio.</p>
+          <p>Contabilidade completa para empresas do Simples Nacional com apuração de impostos, folha de pagamento e consultoria tributária. Foco na conformidade e crescimento do seu negócio.</p>
         </div>
         <div class="image-card">
-          <img src="IMAGEM E.png" alt="Imposto de Renda">
+          <img src="IMAGEM E.png" alt="Imposto de Renda para MEI e Pessoa Física" loading="lazy">
           <h3>Imposto de Renda</h3>
-          <p style="text-align: justify;">Declaração de Imposto de Renda para Pessoa Física e MEI com precisão e segurança. Evite a malha fina com a nossa análise detalhada e maximize as suas deduções legais. Nós cuidamos de tudo para você, com segurança e agilidade.</p>
+          <p>Declaração de Imposto de Renda para Pessoa Física e MEI com precisão e segurança. Evite a malha fina com a nossa análise detalhada e maximize as suas deduções legais.</p>
         </div>
         <div class="image-card">
-          <img src="IMAGEM F.png" alt="Certificado Digital">
+          <img src="IMAGEM F.png" alt="Certificado Digital e-CPF e e-CNPJ" loading="lazy">
           <h3>Certificado Digital</h3>
-          <p style="text-align: justify;">Emissão e renovação de certificados e-CPF e e-CNPJ (A1 e A3) com agilidade e suporte completo. Atendimento presencial ou por videoconferência.</p>
+          <p>Emissão e renovação de certificados e-CPF e e-CNPJ (A1 e A3) com agilidade e suporte completo. Atendimento presencial ou por videoconferência.</p>
         </div>
         <div class="image-card">
-          <img src="IMAGEM G.png" alt="Cálculos Trabalhistas">
+          <img src="IMAGEM G.png" alt="Cálculos trabalhistas em São Gonçalo" loading="lazy">
           <h3>Cálculos Trabalhistas</h3>
-          <p style="text-align: justify;">Realizamos cálculos de rescisões, horas extras, férias, 13º, FGTS e outras verbas trabalhistas. Elaboramos laudos claros e ágeis para processos judiciais e extrajudiciais.</p>
+          <p>Realizamos cálculos de rescisões, horas extras, férias, 13º, FGTS e outras verbas trabalhistas. Elaboramos laudos claros e ágeis para processos judiciais e extrajudiciais.</p>
         </div>
         <div class="image-card">
-          <img src="IMAGEM I.png" alt="BPO Financeiro">
+          <img src="IMAGEM I.png" alt="BPO Financeiro para empresas em São Gonçalo" loading="lazy">
           <h3>BPO Financeiro</h3>
-          <p style="text-align: justify;">O nosso BPO Financeiro ajuda empreendedores a organizarem suas finanças sem precisar contratar equipe interna. Cuidamos da rotina financeira com eficiência e discrição. Inclui controle de contas a pagar e receber, emissão de boletos e notas fiscais. Também realizamos fluxo de caixa mensal e conciliação bancária. Oferecemos cobrança ativa simples para reduzir a inadimplência.</p>
+          <p>O nosso BPO Financeiro ajuda empreendedores a organizarem suas finanças sem precisar contratar equipe interna. Inclui controle de contas a pagar e receber, emissão de boletos e notas fiscais.</p>
         </div>
         <div class="image-card">
-          <img src="IMAGEM J.png" alt="Regularização de Débitos Tributários">
+          <img src="IMAGEM J.png" alt="Regularização de débitos tributários em São Gonçalo" loading="lazy">
           <h3>Regularização de Débitos Tributários</h3>
-          <p style="text-align: justify;">Precisa regularizar débitos tributários como pessoa física ou jurídica? Nós cuidamos de todo o processo com segurança, agilidade e sigilo. Evite multas, bloqueios e restrições no CPF ou CNPJ. Analisamos sua situação e negociamos as melhores condições com a Receita Federal e demais órgãos. Atendemos MEI, Simples Nacional e também contribuinte pessoa física.</p>
-<h2 class="subtitle"><p style="color: #1e263700;">MEI, Simples Nacional,Abertura de CNPJ-MEI, Cálculos trabalhistas.</p></h2>
+          <p>Precisa regularizar débitos tributários? Nós cuidamos de todo o processo com segurança e agilidade. Evite multas, bloqueios e restrições no CPF ou CNPJ.</p>
         </div>
-      </div>
-      <div class="section-footer">
-        <p>© 2025 VX Contabilidade. Todos os direitos reservados.</p>
       </div>
     </section>
 
     <section id="sobre" style="display: none;">
-      <h2 class="section-title">Quem somos</h2>
+      <h2 class="section-title">Sobre a VX Contabilidade</h2>
       <div class="about-section">
-        <img src="IMAGEM H.png" alt="Vitor de Oliveira Xavier">
+        <img src="IMAGEM H.png" alt="Vitor de Oliveira Xavier - Contador em São Gonçalo" loading="lazy">
         <div class="about-text">
-          <p style="text-align: justify;">Sou Vitor de Oliveira Xavier, contador inscrito no CRC-RJ sob nº 137627/O-4. Graduado em Ciências Contábeis pela Universidade Estácio de Sá e pós-graduado em Gestão de Departamento Pessoal pela Unifaveni. Possuo certificados CFIS nos cursos de atualização sobre as rotinas de Analista Contábil, Analista de Departamento Pessoal, Analista Fiscal, Cálculos de Folha de Pagamento, Cruzamentos SPED Fiscal (EFD ICMS-IPI), DCTFWEB Na Prática, ECD 2024, ECF 2024, Faturamento e Emissão de Notas Fiscais, Fundamentos da Perícia Contábil, ICMS: Aspectos Constitucionais e Práticos, ICMS Substituição Tributária (ICMS ST) e Planejamento Estratégico Aplicado à Área Fiscal. Sou especialista em contabilidade para MEIs e empresas do Simples Nacional. Meu foco é simplificar a gestão fiscal, oferecendo soluções eficientes para o crescimento do seu negócio. Atendo toda a Região Metropolitana do Rio de Janeiro, com serviços personalizados e suporte contínuo.</p>
+          <p style="text-align: justify;">Sou Vitor de Oliveira Xavier, contador inscrito no CRC-RJ sob nº 137627/O-4. Graduado em Ciências Contábeis pela Universidade Estácio de Sá e pós-graduado em Gestão de Departamento Pessoal pela Unifaveni. Sou especialista em <strong>contabilidade para MEI</strong> e <strong>Simples Nacional</strong> em São Gonçalo, RJ.</p>
+          <p style="text-align: justify;">Possuo certificados CFIS em Analista Contábil, Departamento Pessoal, Cálculos de Folha de Pagamento, SPED Fiscal, DCTFWEB, ECD 2024, ECF 2024 e mais. Atendo toda a Região Metropolitana do Rio de Janeiro com serviços personalizados.</p>
         </div>
       </div>
       <div class="mission-vision-values">
-        <h2 class="section-title">Missão</h2>
-        <p style="text-align: justify;">Oferecer serviços contábeis com ética e transparência, ajudando empreendedores a tomar decisões estratégicas para o sucesso sustentável dos seus negócios.</p>
-        <h2 class="section-title">Visão</h2>
-        <p style="text-align: justify;">Ser referência em contabilidade, construindo confiança e agregando valor com soluções modernas e personalizadas.</p>
-        <h2 class="section-title">Valores</h2>
+        <h3 class="section-title">Missão</h3>
+        <p>Oferecer serviços contábeis com ética e transparência, ajudando empreendedores a tomar decisões estratégicas.</p>
+        <h3 class="section-title">Visão</h3>
+        <p>Ser referência em contabilidade em São Gonçalo, construindo confiança com soluções modernas.</p>
+        <h3 class="section-title">Valores</h3>
         <div class="values-list">
-          <p style="text-align: justify;">• Ética e Transparência: honestidade e conformidade com normas contábeis.</p>
-          <p style="text-align: justify;">• Comprometimento: dedicação às necessidades dos clientes.</p>
-          <p style="text-align: justify;">• Inovação: atualização contínua e uso de novas tecnologias.</p>
-          <p style="text-align: justify;">• Foco no Cliente: soluções personalizadas para cada negócio.</p>
-          <p style="text-align: justify;">• Confidencialidade: segurança e privacidade das informações.</p>
+          <p>• Ética e Transparência: honestidade e conformidade com normas contábeis.</p>
+          <p>• Comprometimento: dedicação às necessidades dos clientes.</p>
+          <p>• Inovação: atualização contínua e uso de novas tecnologias.</p>
+          <p>• Foco no Cliente: soluções personalizadas para cada negócio.</p>
+          <p>• Confidencialidade: segurança e privacidade das informações.</p>
         </div>
       </div>
-
-      <h2 class="section-title">O que dizem sobre nós</h2>
+      <h3 class="section-title">Depoimentos de Clientes</h3>
       <div class="carousel-container">
         <div class="carousel" id="carousel">
-          <img src="IMAGEM K.png" alt="IMAGEM K">
-          <img src="IMAGEM L.png" alt="IMAGEM L">
-          <img src="IMAGEM M.png" alt="IMAGEM M">
-          <img src="IMAGEM N.png" alt="IMAGEM N">
-          <img src="IMAGEM O.png" alt="IMAGEM O">
-          <img src="IMAGEM P.png" alt="IMAGEM P">
-          <img src="IMAGEM Q.png" alt="IMAGEM Q">
-          <img src="IMAGEM R.png" alt="IMAGEM R">
-          <img src="IMAGEM K.png" alt="IMAGEM K">
-          <img src="IMAGEM L.png" alt="IMAGEM L">
+          <img src="IMAGEM K.png" alt="Depoimento de cliente sobre contabilidade MEI" loading="lazy">
+          <img src="IMAGEM L.png" alt="Depoimento de cliente sobre Simples Nacional" loading="lazy">
+          <img src="IMAGEM M.png" alt="Depoimento de cliente sobre cálculos trabalhistas" loading="lazy">
+          <img src="IMAGEM N.png" alt="Depoimento de cliente sobre BPO financeiro" loading="lazy">
+          <img src="IMAGEM O.png" alt="Depoimento de cliente sobre imposto de renda" loading="lazy">
+          <img src="IMAGEM P.png" alt="Depoimento de cliente sobre regularização tributária" loading="lazy">
+          <img src="IMAGEM Q.png" alt="Depoimento de cliente sobre contabilidade São Gonçalo" loading="lazy">
+          <img src="IMAGEM R.png" alt="Depoimento de cliente sobre serviços contábeis" loading="lazy">
+          <img src="IMAGEM K.png" alt="Depoimento de cliente sobre contabilidade MEI" loading="lazy">
+          <img src="IMAGEM L.png" alt="Depoimento de cliente sobre Simples Nacional" loading="lazy">
         </div>
         <div class="dots" id="dots"></div>
-      </div>
-<h2 class="subtitle"><p style="color: #1e263700;">MEI, Simples Nacional,Abertura de CNPJ-MEI, Cálculos trabalhistas.</p></h2>
-
-      <div class="footer">
-        <p>© 2025 VX Contabilidade. Todos os direitos reservados.</p>
       </div>
     </section>
 
     <section id="contato" style="display: none;">
-      <h2 class="section-title">Entre em contato</h2>
+      <h2 class="section-title">Entre em Contato</h2>
       <div class="contact-form">
         <form id="contact-form">
           <label for="name">Nome</label>
@@ -756,7 +807,7 @@
           <label for="message">Mensagem</label>
           <textarea id="message" name="message" rows="5" required></textarea>
           <div class="lgpd-notice">
-            <p style="text-align: justify;">Ao enviar este formulário, você concorda com a coleta e tratamento de seus dados pessoais conforme a Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018). Seus dados serão usados exclusivamente para responder à sua solicitação e não serão compartilhados com terceiros sem seu consentimento. Para mais informações, consulte nossa <a href="#politica-privacidade" onclick="showSection('politica-privacidade')">Política de Privacidade</a>.</p>
+            <p>Ao enviar este formulário, você concorda com a coleta e tratamento de seus dados pessoais conforme a <a href="#politica-privacidade" onclick="showSection('politica-privacidade')">Política de Privacidade</a> (LGPD - Lei nº 13.709/2018).</p>
           </div>
           <div class="g-recaptcha" data-sitekey="6Le3fnErAAAAAEFqQ3a3px-EvLdAueMRPG-9HErC"></div>
           <button type="button" onclick="sendEmail()">Enviar</button>
@@ -764,90 +815,46 @@
       </div>
       <div class="social-links">
         <a href="https://www.instagram.com/vx_contabilidade?igsh=MTlodHh0OTliMWh1dg==">
-          <img src="insta.png" alt="Instagram">
+          <img src="insta.png" alt="Instagram da VX Contabilidade" loading="lazy">
         </a>
         <a href="https://wa.me/5521985430782">
-          <img src="whats.png" alt="WhatsApp">
+          <img src="whats.png" alt="WhatsApp da VX Contabilidade" loading="lazy">
         </a>
       </div>
       <div class="map">
         <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d470585.5722958972!2d-43.6084183!3d-22.8598374!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6369bd747cd8ab49%3A0x9b2e7a2aeaa65670!2sVX%20Contabilidade!5e0!3m2!1spt-BR!2sbr!4v1751071132714!5m2!1spt-BR!2sbr" width="1900" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
-<h2 class="subtitle"><p style="color: #1e263700;">MEI, Simples Nacional,Abertura de CNPJ-MEI, Cálculos trabalhistas.</p></h2>
-      <div class="footer">
-        <p>© 2025 VX Contabilidade. Todos os direitos reservados.</p>
       </div>
     </section>
 
     <section id="politica-privacidade" style="display: none;">
       <h2 class="section-title">Política de Privacidade</h2>
       <div class="privacy-content">
-        <p style="text-align: justify;">A VX Contabilidade, site do contador Vitor de Oliveira Xavier, inscrito no CPF sob o nº 112.688.237-24, com sede na cidade de São Gonçalo, RJ, está comprometida com a proteção dos dados pessoais de seus clientes, parceiros e visitantes, em conformidade com a Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018). Esta Política de Privacidade descreve como coletamos, usamos, armazenamos e protegemos suas informações.</p>
-
-        <h3>1. Dados Coletados</h3>
-        <p style="text-align: justify;">Nós coletamos os seguintes dados pessoais fornecidos por você:</p>
-        <ul>
-          <li>Nome completo;</li>
-          <li>Telefone;</li>
-          <li>E-mail;</li>
-          <li>Mensagens enviadas por meio do formulário de contato;</li>
-          <li>Outros dados fornecidos voluntariamente durante a interação com nossos serviços.</li>
-        </ul>
-        <p style="text-align: justify;">Também podemos coletar dados de navegação, como endereço IP, tipo de dispositivo, navegador utilizado e páginas visitadas, por meio de cookies e tecnologias similares, para melhorar sua experiência em nosso site.</p>
-
-        <h3>2. Finalidade da Coleta</h3>
-        <p style="text-align: justify;">Os dados coletados são utilizados para:</p>
-        <ul>
-          <li>Responder às suas solicitações e prestar atendimento personalizado;</li>
-          <li>Enviar comunicações relacionadas aos serviços contratados;</li>
-          <li>Cumprir obrigações legais e fiscais;</li>
-          <li>Melhorar a funcionalidade e a segurança do nosso site;</li>
-          <li>Realizar análises estatísticas para aprimorar nossos serviços.</li>
-        </ul>
-
-        <h3>3. Compartilhamento de Dados</h3>
-        <p style="text-align: justify;">Seus dados pessoais não serão compartilhados com terceiros, exceto:</p>
-        <ul>
-          <li>Com prestadores de serviços que nos auxiliam na operação do site (ex.: serviços de hospedagem, e-mail e reCAPTCHA), sob contratos que garantem a proteção dos dados;</li>
-          <li>Para cumprir exigências legais, como ordens judiciais ou solicitações de autoridades competentes;</li>
-          <li>Com seu consentimento expresso, quando necessário.</li>
-        </ul>
-
-        <h3>4. Armazenamento e Segurança</h3>
-        <p style="text-align: justify;">Os dados são armazenados em ambientes seguros, com medidas técnicas e administrativas para protegê-los contra acessos não autorizados, perda ou uso indevido. Mantemos os dados pelo tempo necessário para cumprir as finalidades descritas ou conforme exigido por lei.</p>
-
-        <h3>5. Direitos do Titular dos Dados</h3>
-        <p style="text-align: justify;">De acordo com a LGPD, você tem os seguintes direitos:</p>
-        <ul>
-          <li>Confirmar a existência de tratamento de dados;</li>
-          <li>Acessar seus dados pessoais;</li>
-          <li>Corrigir dados incompletos, inexatos ou desatualizados;</li>
-          <li>Solicitar a exclusão de dados desnecessários ou tratados em desconformidade com a LGPD;</li>
-          <li>Revogar o consentimento, quando aplicável.</li>
-        </ul>
-        <p style="text-align: justify;">Para exercer esses direitos, entre em contato pelo e-mail vxcontabilidade@gmail.com.</p>
-
-        <h3>6. Cookies e Tecnologias de Rastreamento</h3>
-        <p style="text-align: justify;">Nosso site utiliza cookies para melhorar a experiência do usuário e coletar dados de navegação. Você pode gerenciar as preferências de cookies diretamente no seu navegador.</p>
-
-        <h3>7. Alterações nesta Política</h3>
-        <p style="text-align: justify;">Podemos atualizar esta Política de Privacidade periodicamente para refletir mudanças em nossas práticas ou na legislação. Recomendamos que você reveja esta página regularmente.</p>
-
-        <h3>8. Contato</h3>
-        <p style="text-align: justify;">Se você tiver dúvidas sobre esta Política de Privacidade ou sobre o tratamento de seus dados, entre em contato conosco:</p>
+        <p>A VX Contabilidade, sob responsabilidade de Vitor de Oliveira Xavier (CPF: 112.688.237-24), está comprometida com a proteção de dados pessoais, conforme a LGPD (Lei nº 13.709/2018).</p>
+        <h3>Dados Coletados</h3>
+        <p>Coletamos dados fornecidos por você, como nome, telefone, e-mail e mensagens enviadas via formulário de contato, além de dados de navegação (cookies, IP, dispositivo).</p>
+        <h3>Finalidade da Coleta</h3>
+        <p>Os dados são usados para responder solicitações, enviar comunicações, cumprir obrigações legais, melhorar o site e realizar análises estatísticas.</p>
+        <h3>Compartilhamento de Dados</h3>
+        <p>Não compartilhamos dados com terceiros, exceto com prestadores de serviços (ex.: hospedagem, e-mail) sob contratos de proteção ou por exigência legal.</p>
+        <h3>Armazenamento e Segurança</h3>
+        <p>Os dados são armazenados em ambientes seguros, com medidas técnicas para protegê-los contra acessos não autorizados.</p>
+        <h3>Direitos do Titular</h3>
+        <p>Você pode acessar, corrigir, excluir seus dados ou revogar consentimento pelo e-mail vxcontabilidade@gmail.com.</p>
+        <h3>Contato</h3>
+        <p>Para dúvidas, contate-nos:</p>
         <ul>
           <li>E-mail: vxcontabilidade@gmail.com</li>
           <li>Telefone: (21) 98543-0782</li>
-          <li>Endereço: Travessa Joaquim Seabra,nº 42, Nova Cidade, São Gonçalo, RJ</li>
+          <li>Endereço: Travessa Joaquim Seabra, nº 42, Nova Cidade, São Gonçalo, RJ</li>
         </ul>
-        <p style="text-align: justify;">Última atualização: 01 de julho de 2025.</p>
-      </div>
-<h2 class="subtitle"><p style="color: #1e263700;">MEI, Simples Nacional,Abertura de CNPJ-MEI, Cálculos trabalhistas.</p></h2>
-      <div class="footer">
-        <p>© 2025 VX Contabilidade. Todos os direitos reservados.</p>
+        <p>Última atualização: 01 de julho de 2025.</p>
       </div>
     </section>
   </main>
+  <footer class="footer">
+    <p>VX Contabilidade - Travessa Joaquim Seabra, nº 42, Nova Cidade, São Gonçalo, RJ</p>
+    <p>© 2025 VX Contabilidade. Todos os direitos reservados.</p>
+  </footer>
 
   <script>
     function toggleMenu() {
@@ -866,9 +873,8 @@
     const heroCarousel = document.getElementById('hero-carousel');
     const heroImages = heroCarousel.getElementsByTagName('img');
     let heroIndex = 0;
-    const heroImagesPerView = window.innerWidth <= 768 ? 1 : 3; // 1 imagem em mobile, 3 em desktop
-    const totalHeroImages = 6; // AA, AB, AC, AD, AE, AF
-    const imageOrder = ['AA', 'AB', 'AC', 'AD', 'AE', 'AF'];
+    const heroImagesPerView = window.innerWidth <= 768 ? 1 : 3;
+    const totalHeroImages = 6;
 
     function updateHeroSlide() {
       const offset = heroIndex * (100 / heroImagesPerView);
@@ -881,7 +887,7 @@
         heroIndex = 0;
         heroCarousel.style.transition = 'none';
         updateHeroSlide();
-        heroCarousel.offsetHeight; // Forçar reflow
+        heroCarousel.offsetHeight;
         heroCarousel.style.transition = 'transform 0.5s ease-in-out';
       } else {
         updateHeroSlide();
@@ -894,14 +900,13 @@
         heroIndex = totalHeroImages - heroImagesPerView;
         heroCarousel.style.transition = 'none';
         updateHeroSlide();
-        heroCarousel.offsetHeight; // Forçar reflow
+        heroCarousel.offsetHeight;
         heroCarousel.style.transition = 'transform 0.5s ease-in-out';
       } else {
         updateHeroSlide();
       }
     }
 
-    // Iniciar carrossel automático
     setInterval(nextHeroSlide, 3000);
 
     // Testimonial Carousel
@@ -909,10 +914,9 @@
     const dotsContainer = document.getElementById('dots');
     const images = carousel.getElementsByTagName('img');
     let currentIndex = 0;
-    const imagesPerView = 2; // Mostrar 2 imagens por vez
-    const totalPairs = 4; // Total de pares (K,L), (M,N), (O,P), (Q,R)
+    const imagesPerView = 2;
+    const totalPairs = 4;
 
-    // Criar bolinhas de navegação (uma por par)
     for (let i = 0; i < totalPairs; i++) {
       const dot = document.createElement('span');
       dot.classList.add('dot');
@@ -923,28 +927,24 @@
 
     const dots = document.getElementsByClassName('dot');
 
-    // Função para ir para um par específico
     function goToSlide(index) {
       currentIndex = index;
       carousel.style.transform = `translateX(-${index * 100}%)`;
       updateDots();
     }
 
-    // Atualizar bolinhas ativas
     function updateDots() {
       for (let i = 0; i < dots.length; i++) {
         dots[i].classList.toggle('active', i === currentIndex);
       }
     }
 
-    // Função para passar para o próximo par
     function nextSlide() {
       currentIndex++;
       if (currentIndex >= totalPairs) {
         currentIndex = 0;
-        carousel.style.transition = 'none'; // Desativa transição para reset
+        carousel.style.transition = 'none';
         carousel.style.transform = `translateX(0%)`;
-        // Forçar reflow para reiniciar a transição
         carousel.offsetHeight;
         carousel.style.transition = 'transform 0.5s ease-in-out';
       } else {
@@ -953,17 +953,14 @@
       updateDots();
     }
 
-    // Iniciar carrossel automático (muda a cada 3 segundos)
     setInterval(nextSlide, 3000);
 
-    // Initialize EmailJS with your public key
     emailjs.init("s0FfO34iE-17Lz7Wc");
 
     function sendEmail() {
-      // Verify reCAPTCHA
       const recaptchaResponse = grecaptcha.getResponse();
       if (!recaptchaResponse) {
-        alert('Por favor, complete o reCAPTCHA para verificar que você não é um robô.');
+        alert('Por favor, complete o reCAPTCHA.');
         return;
       }
 
@@ -979,17 +976,12 @@
         .then(() => {
           alert('Mensagem enviada com sucesso!');
           document.getElementById('contact-form').reset();
-          document.getElementById('name').value = '';
-          document.getElementById('phone').value = '';
-          document.getElementById('email').value = '';
-          document.getElementById('message').value = '';
           grecaptcha.reset();
         }, (error) => {
           alert('Erro ao enviar a mensagem: ' + JSON.stringify(error));
         });
     }
 
-    // Show section based on URL hash or default to 'inicio'
     window.addEventListener('load', () => {
       const hash = window.location.hash.replace('#', '');
       if (['inicio', 'servicos', 'sobre', 'contato', 'politica-privacidade'].includes(hash)) {
