@@ -867,44 +867,44 @@
     }
 
     // Hero Carousel
-    const heroCarousel = document.getElementById('hero-carousel');
-    const heroImages = heroCarousel.getElementsByTagName('img');
-    let heroIndex = 0;
-    const heroImagesPerView = window.innerWidth <= 768 ? 1 : 2;
-    const totalHeroImages = 4;
+const heroCarousel = document.getElementById('hero-carousel');
+  const heroImages = heroCarousel.getElementsByTagName('img');
+  let heroIndex = 0;
+  const heroImagesPerView = window.innerWidth <= 768 ? 1 : 2;
+  const totalHeroImages = heroImages.length;
 
-    function updateHeroSlide() {
-      const offset = heroIndex * (100 / heroImagesPerView);
-      heroCarousel.style.transform = `translateX(-${offset}%)`;
+  function updateHeroSlide() {
+    const offset = heroIndex * (100 / heroImagesPerView);
+    heroCarousel.style.transform = `translateX(-${offset}%)`;
+  }
+
+  function nextHeroSlide() {
+    heroIndex++;
+    if (heroIndex >= totalHeroImages - heroImagesPerView + 1) {
+      heroIndex = 0;
+      heroCarousel.style.transition = 'none';
+      updateHeroSlide();
+      heroCarousel.offsetHeight;
+      heroCarousel.style.transition = 'transform 1s ease-in-out';
+    } else {
+      updateHeroSlide();
     }
+  }
 
-    function nextHeroSlide() {
-      heroIndex++;
-      if (heroIndex >= totalHeroImages - heroImagesPerView + 1) {
-        heroIndex = 0;
-        heroCarousel.style.transition = 'none';
-        updateHeroSlide();
-        heroCarousel.offsetHeight;
-        heroCarousel.style.transition = 'transform 1s ease-in-out';
-      } else {
-        updateHeroSlide();
-      }
+  function prevHeroSlide() {
+    heroIndex--;
+    if (heroIndex < 0) {
+      heroIndex = totalHeroImages - heroImagesPerView;
+      heroCarousel.style.transition = 'none';
+      updateHeroSlide();
+      heroCarousel.offsetHeight;
+      heroCarousel.style.transition = 'transform 1s ease-in-out';
+    } else {
+      updateHeroSlide();
     }
+  }
 
-    function prevHeroSlide() {
-      heroIndex--;
-      if (heroIndex < 0) {
-        heroIndex = totalHeroImages - heroImagesPerView;
-        heroCarousel.style.transition = 'none';
-        updateHeroSlide();
-        heroCarousel.offsetHeight;
-        heroCarousel.style.transition = 'transform 1s ease-in-out';
-      } else {
-        updateHeroSlide();
-      }
-    }
-
-    setInterval(nextHeroSlide, 3000);
+  setInterval(nextHeroSlide, 3000);
 
     // Testimonial Carousel
     const carousel = document.getElementById('carousel');
