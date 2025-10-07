@@ -513,17 +513,28 @@
 
     .popup-content {
       position: relative;
-      max-width: 90%;
+      max-width: 50%;
       max-height: 90%;
       background-color: white;
       border-radius: 8px;
       overflow: auto;
+      display: flex;
+      flex-direction: column;
     }
 
-    .popup-content img {
+    .popup-images {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
       width: 100%;
+      padding: 20px;
+    }
+
+    .popup-images img {
+      width: 48%;
       height: auto;
-      display: block;
+      max-height: 70vh;
+      object-fit: contain;
     }
 
     .popup-close {
@@ -665,6 +676,21 @@
       .carousel-btn {
         padding: 8px;
         font-size: 20px;
+      }
+
+      .popup-content {
+        max-width: 90%;
+      }
+
+      .popup-images {
+        flex-direction: column;
+        padding: 10px;
+      }
+
+      .popup-images img {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 10px;
       }
     }
   </style>
@@ -859,7 +885,7 @@
           <li>Telefone: (21) 98543-0782</li>
           <li>Endereço: Travessa Joaquim Seabra, nº 42, Nova Cidade, São Gonçalo, RJ</li>
         </ul>
-        <p>Última atualização: 11 de Setembro de 2025.</p>
+        <p>Última atualização: 07 de Outubro de 2025.</p>
       </div>
     </section>
   </main>
@@ -867,19 +893,14 @@
   <p>© 2025 VX Contabilidade. Todos os direitos reservados.</p>
   </footer>
 
-  <!-- Popup 1: IMAGEM S.png -->
-  <div id="popup1" class="popup-overlay">
+  <!-- Popup Combinado: IMAGEM S.png à esquerda e IMAGEM T.png à direita -->
+  <div id="popup-combined" class="popup-overlay">
     <div class="popup-content">
-      <button class="popup-close" onclick="closePopup(1)">&times;</button>
-      <img src="IMAGEM S.png" alt="Popup Inicial - VX Contabilidade" loading="lazy">
-    </div>
-  </div>
-
-  <!-- Popup 2: IMAGEM T.png -->
-  <div id="popup2" class="popup-overlay">
-    <div class="popup-content">
-      <button class="popup-close" onclick="closePopup(2)">&times;</button>
-      <img src="IMAGEM T.png" alt="Popup Secundário - VX Contabilidade" loading="lazy">
+      <button class="popup-close" onclick="closeCombinedPopup()">&times;</button>
+      <div class="popup-images">
+        <img src="IMAGEM S.png" alt="Popup Inicial - VX Contabilidade" loading="lazy">
+        <img src="IMAGEM T.png" alt="Popup Secundário - VX Contabilidade" loading="lazy">
+      </div>
     </div>
   </div>
 
@@ -896,23 +917,13 @@
       });
     }
 
-    // Funções para Popups
-    function showPopup1() {
-      document.getElementById('popup1').classList.add('active');
+    // Funções para Popup Combinado
+    function showCombinedPopup() {
+      document.getElementById('popup-combined').classList.add('active');
     }
 
-    function showPopup2() {
-      document.getElementById('popup2').classList.add('active');
-    }
-
-    function closePopup(popupNum) {
-      if (popupNum === 1) {
-        document.getElementById('popup1').classList.remove('active');
-        // Abre o segundo popup
-        setTimeout(showPopup2, 300); // Pequeno delay para transição suave
-      } else if (popupNum === 2) {
-        document.getElementById('popup2').classList.remove('active');
-      }
+    function closeCombinedPopup() {
+      document.getElementById('popup-combined').classList.remove('active');
     }
 
     // Hero Carousel
@@ -1032,13 +1043,13 @@
       const hash = window.location.hash.replace('#', '');
       if (['inicio', 'servicos', 'sobre', 'contato', 'politica-privacidade'].includes(hash)) {
         showSection(hash);
-        // Mostra o primeiro popup apenas se for a seção 'inicio' (carregamento ou refresh)
+        // Mostra o popup combinado apenas se for a seção 'inicio' (carregamento ou refresh)
         if (hash === 'inicio' || hash === '') {
-          setTimeout(showPopup1, 500); // Delay curto para carregar a página
+          setTimeout(showCombinedPopup, 500); // Delay curto para carregar a página
         }
       } else {
         showSection('inicio');
-        setTimeout(showPopup1, 500);
+        setTimeout(showCombinedPopup, 500);
       }
     });
   </script>
