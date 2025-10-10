@@ -1,4 +1,43 @@
-<!DOCTYPE html>
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
@@ -151,6 +190,42 @@
       font-size: 18px;
       margin: 10px 0;
       text-align: center;
+    }
+
+    /* Promo Button */
+    .promo-button {
+      background-color: #2c7873;
+      color: #f7e8a0;
+      padding: 12px 24px;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: block;
+      margin: 20px auto;
+      transition: background-color 0.3s ease;
+      animation: pulse 2s infinite ease-in-out;
+    }
+
+    .promo-button:hover {
+      background-color: #22635e;
+      animation-play-state: paused;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(44, 120, 115, 0.7);
+      }
+      50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 10px 5px rgba(44, 120, 115, 0.4);
+      }
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(44, 120, 115, 0.7);
+      }
     }
 
     /* Main Content */
@@ -543,8 +618,8 @@
       right: 15px;
       font-size: 30px;
       font-weight: bold;
-      color: #fff; /* Alterado para branco para destaque */
-      text-shadow: 0 0 3px rgba(0, 0, 0, 0.8); /* Sombra sutil para melhor visibilidade */
+      color: #fff;
+      text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
       cursor: pointer;
       z-index: 2001;
       background: none;
@@ -554,8 +629,8 @@
     }
 
     .popup-close:hover {
-      color: #2c7873; /* Mantido o hover na cor principal do site para contraste */
-      text-shadow: 0 0 3px rgba(0, 0, 0, 0.5); /* Sombra ajustada no hover */
+      color: #2c7873;
+      text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
     }
 
     /* Desktop-specific styles for services section */
@@ -692,6 +767,11 @@
         max-width: 100%;
         margin-bottom: 10px;
       }
+
+      .promo-button {
+        padding: 10px 20px;
+        font-size: 16px;
+      }
     }
   </style>
 </head>
@@ -735,6 +815,7 @@
           <button class="carousel-btn right" onclick="nextHeroSlide()">❯</button>
         </div>
       </div>
+      <button class="promo-button" onclick="showCombinedPopup()" aria-label="Ver promoções">Promoções</button>
       <h1 class="title">Contabilidade para MEI e Simples Nacional</h1>
       <h2 class="subtitle">Serviços contábeis eficientes para o crescimento da sua empresa</h2>
       <div class="welcome-message">
@@ -885,18 +966,18 @@
           <li>Telefone: (21) 98543-0782</li>
           <li>Endereço: Travessa Joaquim Seabra, nº 42, Nova Cidade, São Gonçalo, RJ</li>
         </ul>
-        <p>Última atualização: 07 de Outubro de 2025.</p>
+        <p>Última atualização: 10 de Outubro de 2025.</p>
       </div>
     </section>
   </main>
   <footer class="footer">
-  <p>© 2025 VX Contabilidade. Todos os direitos reservados.</p>
+    <p>© 2025 VX Contabilidade. Todos os direitos reservados.</p>
   </footer>
 
   <!-- Popup Combinado: IMAGEM S.png à esquerda e IMAGEM T.png à direita -->
   <div id="popup-combined" class="popup-overlay">
     <div class="popup-content">
-      <button class="popup-close" onclick="closeCombinedPopup()">&times;</button>
+      <button class="popup-close" onclick="closeCombinedPopup()" aria-label="Fechar popup">&times;</button>
       <div class="popup-images">
         <img src="IMAGEM S.png" alt="Popup Inicial - VX Contabilidade" loading="lazy">
         <img src="IMAGEM T.png" alt="Popup Secundário - VX Contabilidade" loading="lazy">
@@ -1043,13 +1124,8 @@
       const hash = window.location.hash.replace('#', '');
       if (['inicio', 'servicos', 'sobre', 'contato', 'politica-privacidade'].includes(hash)) {
         showSection(hash);
-        // Mostra o popup combinado apenas se for a seção 'inicio' (carregamento ou refresh)
-        if (hash === 'inicio' || hash === '') {
-          setTimeout(showCombinedPopup, 500); // Delay curto para carregar a página
-        }
       } else {
         showSection('inicio');
-        setTimeout(showCombinedPopup, 500);
       }
     });
   </script>
