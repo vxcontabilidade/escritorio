@@ -192,6 +192,42 @@
       text-align: center;
     }
 
+    /* Promo Button */
+    .promo-button {
+      background-color: #2c7873;
+      color: #f7e8a0;
+      padding: 12px 24px;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: block;
+      margin: 20px auto;
+      transition: background-color 0.3s ease;
+      animation: pulse 2s infinite ease-in-out;
+    }
+
+    .promo-button:hover {
+      background-color: #22635e;
+      animation-play-state: paused;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(44, 120, 115, 0.7);
+      }
+      50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 10px 5px rgba(44, 120, 115, 0.4);
+      }
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(44, 120, 115, 0.7);
+      }
+    }
+
     /* Main Content */
     .main-content {
       padding: 20px;
@@ -532,6 +568,72 @@
       background-color: #717171;
     }
 
+    /* Estilos para Popups */
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .popup-overlay.active {
+      display: flex;
+    }
+
+    .popup-content {
+      position: relative;
+      max-width: 50%;
+      max-height: 90%;
+      background-color: white;
+      border-radius: 8px;
+      overflow: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .popup-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: 20px;
+    }
+
+    .popup-images img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      max-height: 70vh;
+      object-fit: contain;
+    }
+
+    .popup-close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 30px;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+      cursor: pointer;
+      z-index: 2001;
+      background: none;
+      border: none;
+      padding: 0;
+      line-height: 1;
+    }
+
+    .popup-close:hover {
+      color: #2c7873;
+      text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+    }
+
     /* Desktop-specific styles for services section */
     @media (min-width: 769px) {
       .image-grid {
@@ -651,6 +753,26 @@
         padding: 8px;
         font-size: 20px;
       }
+
+      .popup-content {
+        max-width: 90%;
+      }
+
+      .popup-images {
+        flex-direction: column;
+        padding: 10px;
+      }
+
+      .popup-images img {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 10px;
+      }
+
+      .promo-button {
+        padding: 10px 20px;
+        font-size: 16px;
+      }
     }
   </style>
 </head>
@@ -731,6 +853,7 @@
           <button class="carousel-btn right" onclick="nextHeroSlide()">❯</button>
         </div>
       </div>
+      <button class="promo-button" onclick="showCombinedPopup()" aria-label="Ver promoções">Promoções</button>
       <h1 class="title">Contabilidade para MEI e Simples Nacional</h1>
       <h2 class="subtitle">Serviços contábeis eficientes para o crescimento da sua empresa</h2>
       <div class="welcome-message">
@@ -750,9 +873,7 @@
           <h3>Abertura de MEI Grátis</h3>
           <p>Formalize o seu negócio como MEI sem custos! Obtenha CNPJ, emita notas fiscais, acesse crédito empresarial e tenha direitos previdenciários com a nossa assessoria completa.</p>
         </div>
-        <div class="image
-
--card">
+        <div class="image-card">
           <img src="IMAGEM C.png" alt="Gestão de DAS e DASN-SIMEI para MEI" loading="lazy">
           <h3>Gestão de DAS e DASN-SIMEI</h3>
           <p>Gerenciamos o seu DAS mensalmente e entregamos a Declaração Anual dentro do prazo legal. Fornecemos planilhas de gestão da lucratividade e gestão do estoque para o acompanhamento e crescimento do seu negócio.</p>
@@ -765,7 +886,7 @@
         <div class="image-card">
           <img src="IMAGEM E.png" alt="Imposto de Renda para MEI e Pessoa Física" loading="lazy">
           <h3>Imposto de Renda</h3>
-          <p>Declaração de Imposto de Renda para Pessoa Física e MEI com precisão e segurança. Evite a malha fina com a nossa análise detalhada e maximize as suing deduções legais.</p>
+          <p>Declaração de Imposto de Renda para Pessoa Física e MEI com precisão e segurança. Evite a malha fina com a nossa análise detalhada e maximize as suas deduções legais.</p>
         </div>
         <div class="image-card">
           <img src="IMAGEM F.png" alt="Certificado Digital e-CPF e e-CNPJ" loading="lazy">
@@ -891,6 +1012,15 @@
     <p>© 2025 VX Contabilidade. Todos os direitos reservados.</p>
   </footer>
 
+  <div id="popup-combined" class="popup-overlay">
+    <div class="popup-content">
+      <button class="popup-close" onclick="closeCombinedPopup()" aria-label="Fechar popup">&times;</button>
+      <div class="popup-images">
+        <img src="IMAGEM S.png" alt="Popup Inicial - VX Contabilidade" loading="lazy">
+      </div>
+    </div>
+  </div>
+
   <script>
     function toggleMenu() {
       const menu = document.querySelector('.mobile-menu');
@@ -902,6 +1032,14 @@
       sections.forEach(id => {
         document.getElementById(id).style.display = id === sectionId ? 'block' : 'none';
       });
+    }
+
+    function showCombinedPopup() {
+      document.getElementById('popup-combined').classList.add('active');
+    }
+
+    function closeCombinedPopup() {
+      document.getElementById('popup-combined').classList.remove('active');
     }
 
     const heroCarousel = document.getElementById('hero-carousel');
