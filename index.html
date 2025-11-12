@@ -260,7 +260,7 @@
     }
 
     .hero-carousel img {
-      width: 33.33%;
+      width: 33.33%; /* Alterado para 3 imagens por vez (100% / 3) */
       height: auto;
       object-fit: cover;
       flex-shrink: 0;
@@ -296,7 +296,6 @@
       margin-bottom: 20px;
       color: #2c7873;
     }
-
 .welcome-message h3 { 
 margin-bottom: 1em; 
 }
@@ -604,15 +603,14 @@ margin-bottom: 1em;
 
     .popup-images {
       display: flex;
-      justify-content: center;
+      justify-content: space-around;
       align-items: center;
       width: 100%;
       padding: 20px;
     }
 
     .popup-images img {
-      width: 100%;
-      max-width: 100%;
+      width: 48%;
       height: auto;
       max-height: 70vh;
       object-fit: contain;
@@ -751,7 +749,7 @@ margin-bottom: 1em;
       }
 
       .hero-carousel img {
-        width: 100%;
+        width: 100%; /* Em telas menores, exibe 1 imagem por vez */
       }
 
       .carousel-btn {
@@ -848,11 +846,12 @@ margin-bottom: 1em;
             <img src="IMAGEM AB.png" alt="Simples Nacional em São Gonçalo" loading="lazy">
             <img src="IMAGEM AC.png" alt="Cálculos trabalhistas em São Gonçalo" loading="lazy">
             <img src="IMAGEM AD.png" alt="Imposto de Renda para MEI" loading="lazy">
-            <img src="IMAGEM AE.png" alt="Contabilidade para MEI em São Gonçalo" loading="lazy">
+	    <img src="IMAGEM AE.png" alt="Contabilidade para MEI em São Gonçalo" loading="lazy">
             <img src="IMAGEM AF.png" alt="Simples Nacional em São Gonçalo" loading="lazy">
-            <img src="IMAGEM AC.png" alt="Cálculos trabalhistas em São Gonçalo" loading="lazy">
-            <img src="IMAGEM AD.png" alt="Imposto de Renda para MEI" loading="lazy">
-            <img src="IMAGEM AE.png" alt="Contabilidade para MEI em São Gonçalo" loading="lazy">
+            <!-- Imagens duplicadas para loop infinito -->
+	    <img src="IMAGEM AC.png" alt="Cálculos trabalhistas em São Gonçalo" loading="lazy">
+	    <img src="IMAGEM AD.png" alt="Imposto de Renda para MEI" loading="lazy">
+	    <img src="IMAGEM AE.png" alt="Contabilidade para MEI em São Gonçalo" loading="lazy">
           </div>
           <button class="carousel-btn left" onclick="prevHeroSlide()">❮</button>
           <button class="carousel-btn right" onclick="nextHeroSlide()">❯</button>
@@ -1009,7 +1008,7 @@ margin-bottom: 1em;
           <li>Telefone: (21) 98543-0782</li>
           <li>Endereço: Travessa Joaquim Seabra, nº 42, Nova Cidade, São Gonçalo, RJ</li>
         </ul>
-        <p>Última atualização: 11 de Novembro de 2025.</p>
+        <p>Última atualização: 12 de Novembro de 2025.</p>
       </div>
     </section>
   </main>
@@ -1017,11 +1016,13 @@ margin-bottom: 1em;
     <p>© 2025 VX Contabilidade. Todos os direitos reservados.</p>
   </footer>
 
+  <!-- Popup Combinado: IMAGEM S.png à esquerda e IMAGEM T.png à direita -->
   <div id="popup-combined" class="popup-overlay">
     <div class="popup-content">
       <button class="popup-close" onclick="closeCombinedPopup()" aria-label="Fechar popup">&times;</button>
       <div class="popup-images">
         <img src="IMAGEM S.png" alt="Popup Inicial - VX Contabilidade" loading="lazy">
+        <img src="IMAGEM T.png" alt="Popup Secundário - VX Contabilidade" loading="lazy">
       </div>
     </div>
   </div>
@@ -1039,6 +1040,7 @@ margin-bottom: 1em;
       });
     }
 
+    // Funções para Popup Combinado
     function showCombinedPopup() {
       document.getElementById('popup-combined').classList.add('active');
     }
@@ -1047,12 +1049,13 @@ margin-bottom: 1em;
       document.getElementById('popup-combined').classList.remove('active');
     }
 
+    // Hero Carousel
     const heroCarousel = document.getElementById('hero-carousel');
     const heroImages = heroCarousel.getElementsByTagName('img');
     let heroIndex = 0;
-    const heroImagesPerView = window.innerWidth <= 768 ? 1 : 3;
-    const totalHeroImages = 6;
-    const clonedImages = 3;
+    const heroImagesPerView = window.innerWidth <= 768 ? 1 : 3; // 3 imagens por vez em desktop, 1 em mobile
+    const totalHeroImages = 6; // Total de imagens originais (AA a AF)
+    const clonedImages = 3; // Imagens duplicadas para loop
 
     function updateHeroSlide() {
       const offset = heroIndex * (100 / heroImagesPerView);
@@ -1068,7 +1071,7 @@ margin-bottom: 1em;
           heroCarousel.style.transition = 'none';
           heroIndex = 0;
           updateHeroSlide();
-        }, 500);
+        }, 500); // Tempo deve corresponder à duração da transição
       }
     }
 
@@ -1079,7 +1082,7 @@ margin-bottom: 1em;
         heroIndex = totalHeroImages - heroImagesPerView;
         heroCarousel.style.transition = 'none';
         updateHeroSlide();
-        heroCarousel.offsetHeight;
+        heroCarousel.offsetHeight; // Forçar reflow
         heroCarousel.style.transition = 'transform 0.5s ease-in-out';
       }
       updateHeroSlide();
@@ -1087,6 +1090,7 @@ margin-bottom: 1em;
 
     setInterval(nextHeroSlide, 3000);
 
+    // Testimonial Carousel
     const carousel = document.getElementById('carousel');
     const dotsContainer = document.getElementById('dots');
     const images = carousel.getElementsByTagName('img');
