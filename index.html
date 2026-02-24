@@ -110,7 +110,6 @@
       min-height: 100vh;
     }
 
-    /* Header */
     .header {
       background-color: #2c7873;
       padding: 15px 20px;
@@ -201,43 +200,6 @@
       text-align: center;
     }
 
-    /* Promo Button */
-    .promo-button {
-      background-color: #2c7873;
-      color: #f7e8a0;
-      padding: 12px 24px;
-      font-size: 18px;
-      font-weight: bold;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      display: block;
-      margin: 20px auto;
-      transition: background-color 0.3s ease;
-      animation: pulse 2s infinite ease-in-out;
-    }
-
-    .promo-button:hover {
-      background-color: #22635e;
-      animation-play-state: paused;
-    }
-
-    @keyframes pulse {
-      0% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(44, 120, 115, 0.7);
-      }
-      50% {
-        transform: scale(1.1);
-        box-shadow: 0 0 10px 5px rgba(44, 120, 115, 0.4);
-      }
-      100% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(44, 120, 115, 0.7);
-      }
-    }
-
-    /* Main Content */
     .main-content {
       padding: 20px;
       width: 100%;
@@ -419,7 +381,6 @@ margin-bottom: 1em;
       margin-bottom: 10px;
     }
 
-    /* Contact Form */
     .contact-form {
       max-width: 600px;
       margin: 0 auto 40px;
@@ -526,7 +487,6 @@ margin-bottom: 1em;
       text-align: center;
     }
 
-    /* Full-screen sections */
     #servicos, #sobre, #contato, #politica-privacidade {
       width: 100%;
       max-width: 1200px;
@@ -537,7 +497,6 @@ margin-bottom: 1em;
       min-height: calc(100vh - 80px);
     }
 
-    /* Carousel for Testimonials */
     .carousel-container {
       width: 100%;
       max-width: 640px;
@@ -582,73 +541,6 @@ margin-bottom: 1em;
       background-color: #717171;
     }
 
-    /* Estilos para Popups */
-    .popup-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
-      z-index: 2000;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .popup-overlay.active {
-      display: flex;
-    }
-
-    .popup-content {
-      position: relative;
-      max-width: 50%;
-      max-height: 90%;
-      background-color: white;
-      border-radius: 8px;
-      overflow: auto;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .popup-images {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      padding: 20px;
-    }
-
-    .popup-images img {
-      width: 100%;
-      max-width: 100%;
-      height: auto;
-      max-height: 70vh;
-      object-fit: contain;
-    }
-
-    .popup-close {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 30px;
-      font-weight: bold;
-      color: #fff;
-      text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
-      cursor: pointer;
-      z-index: 2001;
-      background: none;
-      border: none;
-      padding: 0;
-      line-height: 1;
-    }
-
-    .popup-close:hover {
-      color: #2c7873;
-      text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
-    }
-
-    /* Desktop-specific styles for services section */
     @media (min-width: 769px) {
       .image-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -680,7 +572,6 @@ margin-bottom: 1em;
       }
     }
 
-    /* Responsive Design */
     @media (max-width: 768px) {
       .header {
         padding: 10px;
@@ -767,26 +658,6 @@ margin-bottom: 1em;
         padding: 8px;
         font-size: 20px;
       }
-
-      .popup-content {
-        max-width: 90%;
-      }
-
-      .popup-images {
-        flex-direction: column;
-        padding: 10px;
-      }
-
-      .popup-images img {
-        width: 100%;
-        max-width: 100%;
-        margin-bottom: 10px;
-      }
-
-      .promo-button {
-        padding: 10px 20px;
-        font-size: 16px;
-      }
     }
   </style>
 </head>
@@ -867,7 +738,6 @@ margin-bottom: 1em;
           <button class="carousel-btn right" onclick="nextHeroSlide()">❯</button>
         </div>
       </div>
-      <button class="promo-button" onclick="showCombinedPopup()" aria-label="Ver promoções">Promoções</button>
       <h1 class="title">Contabilidade para MEI e Simples Nacional</h1>
       <h2 class="subtitle">Serviços contábeis eficientes para o crescimento da sua empresa</h2>
       <div class="welcome-message">
@@ -1018,22 +888,13 @@ margin-bottom: 1em;
           <li>Telefone: (21) 98543-0782</li>
           <li>Endereço: Travessa Joaquim Seabra, nº 42, Nova Cidade, São Gonçalo, RJ</li>
         </ul>
-        <p>Última atualização: 10 de fevereiro de 2026.</p>
+        <p>Última atualização: 24 de Fevereiro de 2026.</p>
       </div>
     </section>
   </main>
   <footer class="footer">
     <p>© 2025 VX Contabilidade. Todos os direitos reservados.</p>
   </footer>
-
-  <div id="popup-combined" class="popup-overlay">
-    <div class="popup-content">
-      <button class="popup-close" onclick="closeCombinedPopup()" aria-label="Fechar popup">&times;</button>
-      <div class="popup-images">
-        <img src="IMAGEM S.png" alt="Popup Inicial - VX Contabilidade" loading="lazy">
-      </div>
-    </div>
-  </div>
 
   <script>
     function toggleMenu() {
@@ -1046,14 +907,6 @@ margin-bottom: 1em;
       sections.forEach(id => {
         document.getElementById(id).style.display = id === sectionId ? 'block' : 'none';
       });
-    }
-
-    function showCombinedPopup() {
-      document.getElementById('popup-combined').classList.add('active');
-    }
-
-    function closeCombinedPopup() {
-      document.getElementById('popup-combined').classList.remove('active');
     }
 
     const heroCarousel = document.getElementById('hero-carousel');
