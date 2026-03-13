@@ -510,6 +510,43 @@
       text-align: justify;
       font-size: 16px;
     }
+    /* Lightbox para imagens promocionais e IRPF */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.92);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+    .lightbox.active {
+      display: flex;
+    }
+    .lightbox img {
+      max-width: 94%;
+      max-height: 94vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+      pointer-events: none;
+    }
+    .lightbox .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      color: #fff;
+      font-size: 48px;
+      font-weight: bold;
+      cursor: pointer;
+      text-shadow: 0 0 8px #000;
+      z-index: 2001;
+      line-height: 1;
+    }
+    .lightbox .close-btn:hover {
+      color: #f7e8a0;
+    }
     /* Ajustes desktop */
     @media (min-width: 769px) {
       .image-grid {
@@ -548,7 +585,7 @@
         max-width: 336px;
       }
       #irpf2026 img {
-        max-width: 437px; /* 336px * 1.3 */
+        max-width: 437px;
         width: 100%;
         height: auto;
         border-radius: 8px;
@@ -759,16 +796,16 @@
       <p style="text-align: center; margin-bottom: 40px;">Confira nossas promoções vigentes. Entre em contato para mais detalhes!</p>
       <div class="promocoes-grid">
         <div class="promocao-card">
-          <img src="plano1.png" alt="Plano 1 - Promoção VX Contabilidade" loading="lazy">
+          <img src="plano1.png" alt="Plano 1 - Promoção VX Contabilidade" loading="lazy" onclick="openLightbox(this.src)" style="cursor: pointer;">
         </div>
         <div class="promocao-card">
-          <img src="plano2.png" alt="Plano 2 - Promoção VX Contabilidade" loading="lazy">
+          <img src="plano2.png" alt="Plano 2 - Promoção VX Contabilidade" loading="lazy" onclick="openLightbox(this.src)" style="cursor: pointer;">
         </div>
         <div class="promocao-card">
-          <img src="plano3.png" alt="Plano 3 - Promoção VX Contabilidade" loading="lazy">
+          <img src="plano3.png" alt="Plano 3 - Promoção VX Contabilidade" loading="lazy" onclick="openLightbox(this.src)" style="cursor: pointer;">
         </div>
         <div class="promocao-card">
-          <img src="plano4.png" alt="Plano 4 - Promoção VX Contabilidade" loading="lazy">
+          <img src="plano4.png" alt="Plano 4 - Promoção VX Contabilidade" loading="lazy" onclick="openLightbox(this.src)" style="cursor: pointer;">
         </div>
       </div>
     </section>
@@ -781,6 +818,8 @@
         src="irpf2026.png"
         alt="Imposto de Renda Pessoa Física 2026 - VX Contabilidade"
         loading="lazy"
+        onclick="openLightbox(this.src)"
+        style="cursor: pointer;"
       >
     </section>
     <section id="sobre" style="display: none;">
@@ -881,6 +920,13 @@
   <footer class="footer">
     <p>© 2025-2026 VX Contabilidade. Todos os direitos reservados.</p>
   </footer>
+
+  <!-- Lightbox / Modal full-screen -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+    <span class="close-btn" onclick="closeLightbox()">×</span>
+    <img id="lightbox-img" src="" alt="Imagem ampliada">
+  </div>
+
   <script>
     function toggleMenu() {
       const menu = document.querySelector('.mobile-menu');
@@ -896,7 +942,7 @@
     const heroCarousel = document.getElementById('hero-carousel');
     let heroIndex = 0;
     const heroImagesPerView = window.innerWidth <= 768 ? 1 : 3;
-    const totalHeroImages = 9; // Ajustado para o número real de imagens no carousel
+    const totalHeroImages = 9;
     function updateHeroSlide() {
       const offset = heroIndex * (100 / heroImagesPerView);
       heroCarousel.style.transform = `translateX(-${offset}%)`;
@@ -912,11 +958,12 @@
       updateHeroSlide();
     }
     setInterval(nextHeroSlide, 3000);
+
     // Carousel de depoimentos
     const carousel = document.getElementById('carousel');
     const dotsContainer = document.getElementById('dots');
     let currentIndex = 0;
-    const totalPairs = 5; // Ajuste conforme número de pares reais
+    const totalPairs = 5;
     for (let i = 0; i < totalPairs; i++) {
       const dot = document.createElement('span');
       dot.classList.add('dot');
@@ -938,6 +985,7 @@
       updateDots();
     }
     setInterval(nextSlide, 5000);
+
     // EmailJS
     emailjs.init("s0FfO34iE-17Lz7Wc");
     function sendEmail() {
@@ -962,6 +1010,24 @@
           alert('Erro ao enviar: ' + JSON.stringify(error));
         });
     }
+
+    // Lightbox functionality
+    function openLightbox(src) {
+      const lightbox = document.getElementById('lightbox');
+      const img = document.getElementById('lightbox-img');
+      img.src = src;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden'; // trava scroll da página enquanto o modal está aberto
+    }
+
+    function closeLightbox(e) {
+      if (!e || e.target.classList.contains('lightbox') || e.target.classList.contains('close-btn')) {
+        const lightbox = document.getElementById('lightbox');
+        lightbox.classList.remove('active');
+        document.body.style.overflow = ''; // libera scroll
+      }
+    }
+
     // Carregar seção via hash
     window.addEventListener('load', () => {
       const hash = window.location.hash.replace('#', '');
