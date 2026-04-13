@@ -1657,6 +1657,272 @@
       .promo-grid { grid-template-columns: 1fr; }
       .hero h1 { font-size: 36px; }
     }
+
+    /* ==========================================================
+       ===== REFINEMENT LAYER (v2 — modern polish)            =====
+       Inspired by Apple-style editorial design. Layers on top
+       of existing rules without altering markup or JS behavior.
+       ========================================================== */
+
+    :root {
+      --ease-soft: cubic-bezier(.2,.8,.2,1);
+      --shadow-xs: 0 1px 2px rgba(10,22,40,0.04);
+      --shadow-soft: 0 1px 3px rgba(10,22,40,0.04), 0 10px 40px rgba(10,22,40,0.06);
+      --shadow-lift: 0 20px 60px rgba(10,22,40,0.14), 0 2px 6px rgba(10,22,40,0.06);
+    }
+
+    /* --- Typography polish --- */
+    body {
+      font-feature-settings: 'ss01','cv11','kern','liga';
+      letter-spacing: -0.01em;
+      font-synthesis: none;
+    }
+    .section-title,
+    .hero h1,
+    .welcome-text h2,
+    .mei-illustration h3,
+    .mvv-card h3,
+    .contact-form h3,
+    .footer-brand { letter-spacing: -0.025em; }
+
+    /* --- Header refinement --- */
+    .header { height: 64px; }
+    .header.scrolled {
+      background: rgba(10,22,40,0.78);
+      backdrop-filter: saturate(180%) blur(24px);
+      -webkit-backdrop-filter: saturate(180%) blur(24px);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.04);
+    }
+    .nav-cta { transition: background .3s var(--ease-soft), transform .3s var(--ease-soft) !important; }
+    .nav-cta:hover { transform: translateY(-1px); }
+
+    /* --- Hero gold gradient em + subtle grain --- */
+    .hero h1 em {
+      background: linear-gradient(135deg,#f0c84a 0%, #fde68a 45%, #f0c84a 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+    .hero-grid {
+      background-image:
+        linear-gradient(rgba(59,130,246,0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59,130,246,0.055) 1px, transparent 1px);
+      background-size: 72px 72px;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      pointer-events: none;
+      background-image: radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 3px 3px;
+      opacity: .5;
+      mix-blend-mode: overlay;
+    }
+    .hero-badge { letter-spacing: 0.8px; }
+
+    /* --- Buttons polish --- */
+    .btn-primary, .btn-outline, .form-submit {
+      transition: background .3s var(--ease-soft), color .3s var(--ease-soft),
+                  transform .3s var(--ease-soft), box-shadow .3s var(--ease-soft),
+                  border-color .3s var(--ease-soft);
+      will-change: transform;
+    }
+    .btn-primary:hover { box-shadow: 0 14px 40px rgba(240,200,74,0.38), 0 2px 6px rgba(240,200,74,0.25); }
+    .btn-outline:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.18); }
+
+    /* --- Section tags editorial --- */
+    .section-tag { letter-spacing: 2px; font-weight: 700; }
+
+    /* --- Service cards --- */
+    .services-grid { gap: 22px; }
+    .service-card {
+      background: #ffffff;
+      border: 1px solid var(--gray-200);
+      box-shadow: var(--shadow-xs);
+      transition: transform .4s var(--ease-soft),
+                  box-shadow .4s var(--ease-soft),
+                  border-color .4s var(--ease-soft),
+                  background .4s var(--ease-soft);
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lift);
+      border-color: transparent;
+    }
+    .service-icon {
+      transition: background .4s var(--ease-soft), transform .4s var(--ease-soft);
+    }
+    .service-card:hover .service-icon {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+      transform: scale(1.05) rotate(-2deg);
+    }
+
+    /* --- Tip cards --- */
+    .tip-card {
+      transition: transform .4s var(--ease-soft),
+                  box-shadow .4s var(--ease-soft),
+                  border-color .4s var(--ease-soft);
+    }
+    .tip-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lift);
+      border-color: transparent;
+    }
+    .tip-num {
+      background: linear-gradient(180deg, var(--gray-200) 0%, #ffffff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      font-weight: 400;
+    }
+
+    /* --- MVV cards --- */
+    .mvv-card {
+      transition: background .35s var(--ease-soft), transform .35s var(--ease-soft);
+    }
+    .mvv-card:hover {
+      background: #fbfbfd;
+      transform: translateY(-2px);
+    }
+    .mvv-icon {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+      box-shadow: 0 6px 16px rgba(10,22,40,0.18);
+    }
+
+    /* --- Stats --- */
+    .stat-number {
+      font-weight: 400;
+      letter-spacing: -0.03em;
+      background: linear-gradient(180deg, #ffffff 0%, #d4ddee 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+    .stat-label { letter-spacing: 0.4px; }
+
+    /* --- Welcome / promo / testimonials / tips: softer gradient surfaces --- */
+    .welcome-section { background: linear-gradient(180deg, #fbfbfd 0%, var(--off-white) 100%); }
+    .promo-section { background: linear-gradient(180deg, var(--off-white) 0%, #fbfbfd 100%); }
+    .testimonials-section { background: linear-gradient(180deg, var(--off-white) 0%, #fbfbfd 100%); }
+    .tips-section { background: linear-gradient(180deg, #fbfbfd 0%, var(--off-white) 100%); }
+
+    /* --- Carousel nav buttons --- */
+    .dep-nav-btn {
+      transition: all .3s var(--ease-soft);
+      box-shadow: var(--shadow-xs);
+    }
+    .dep-nav-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-soft);
+    }
+
+    /* --- FAQ --- */
+    .faq-question { transition: color .25s var(--ease-soft), padding-left .25s var(--ease-soft); }
+    .faq-question:hover { padding-left: 8px; }
+    .faq-icon { transition: background .3s var(--ease-soft), border-color .3s var(--ease-soft), transform .3s var(--ease-soft); }
+    .faq-question:hover .faq-icon { transform: scale(1.08); }
+
+    /* --- Contact form + fields --- */
+    .contact-form {
+      box-shadow: 0 40px 100px rgba(0,0,0,0.35), 0 8px 24px rgba(0,0,0,0.15);
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+    .form-group input, .form-group textarea { transition: all .25s var(--ease-soft); }
+
+    /* --- IRPF deadline chip --- */
+    .irpf-deadline {
+      background: linear-gradient(135deg, rgba(240,200,74,0.16) 0%, rgba(240,200,74,0.06) 100%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+
+    /* --- MEI illustration: radial gold glow --- */
+    .mei-illustration {
+      background:
+        radial-gradient(ellipse 60% 40% at 50% 0%, rgba(240,200,74,0.15) 0%, transparent 70%),
+        linear-gradient(135deg, #0a1628 0%, #14213D 55%, #1e3a6e 100%);
+      box-shadow: 0 30px 80px rgba(10,22,40,0.25);
+    }
+
+    /* --- About cert tags --- */
+    .cert-tag { transition: all .25s var(--ease-soft); }
+    .cert-tag:hover {
+      background: var(--navy);
+      color: var(--gold-soft);
+      border-color: var(--navy);
+      transform: translateY(-1px);
+    }
+
+    /* --- Footer --- */
+    .footer {
+      background:
+        radial-gradient(ellipse 40% 60% at 20% 0%, rgba(37,99,235,0.08) 0%, transparent 60%),
+        var(--navy);
+    }
+    .footer-links a { transition: color .2s var(--ease-soft), background .2s var(--ease-soft); }
+
+    /* --- Map: tidier framing --- */
+    .map-section iframe {
+      border: 1px solid var(--gray-200);
+      box-shadow: var(--shadow-soft);
+      filter: saturate(0.92);
+      transition: filter .4s var(--ease-soft);
+    }
+    .map-section iframe:hover { filter: saturate(1.05); }
+
+    /* --- WhatsApp float softer resting shadow --- */
+    .whatsapp-float {
+      box-shadow: 0 10px 32px rgba(37,211,102,0.38), 0 2px 6px rgba(37,211,102,0.2);
+    }
+
+    /* --- Back-to-top --- */
+    .back-to-top {
+      box-shadow: var(--shadow-xs), 0 0 0 1px rgba(10,22,40,0.04);
+      transition: all .3s var(--ease-soft);
+    }
+    .back-to-top:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-soft);
+    }
+
+    /* --- Selection --- */
+    ::selection {
+      background: rgba(240,200,74,0.35);
+      color: var(--navy);
+    }
+
+    /* --- Smoother fade-in easing --- */
+    .fade-in { transition: opacity .8s var(--ease-soft), transform .8s var(--ease-soft); }
+
+    /* --- Section rhythm: breathe a bit more on desktop --- */
+    @media (min-width: 900px) {
+      section { padding: 120px 40px; }
+    }
+
+    /* --- Plan cards: softer lift --- */
+    .plan-card {
+      transition: transform .4s var(--ease-soft),
+                  box-shadow .4s var(--ease-soft);
+    }
+    .plan-card:hover {
+      box-shadow: var(--shadow-lift);
+    }
+
+    /* --- Promo tabs: refined --- */
+    .promo-tab { transition: all .3s var(--ease-soft); }
+    .promo-tab:hover { transform: translateY(-1px); }
+
+    /* --- Reduce motion --- */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -2291,18 +2557,22 @@
         <span class="section-tag">Quem somos</span>
         <h2 class="section-title">Sobre a <em>VX Contabilidade</em></h2>
         <p>Sou Vitor de Oliveira Xavier, contador inscrito no CRC-RJ sob nº&nbsp;137627/O-4. Graduado em Ciências Contábeis pela Universidade Estácio de Sá e pós-graduado em Gestão de Departamento Pessoal pela Unifaveni.</p>
-        <p>Sou especialista em <strong>contabilidade para MEI</strong> e <strong>Simples Nacional</strong>, com certificações em Analista Contábil, Departamento Pessoal, Análise Fiscal, ECD, ECF, SPED Fiscal, ICMS e Planejamento Estratégico Fiscal.</p>
-        <p>Atendo toda a Região Metropolitana do Rio de Janeiro com serviços personalizados, suporte contínuo e atendimento humanizado.</p>
+        <p>Sou especialista em <strong>contabilidade para MEI</strong> e <strong>Simples Nacional</strong>. Atendo toda a Região Metropolitana do Rio de Janeiro com serviços personalizados, suporte contínuo e atendimento humanizado.</</p>
+        <p><Strong> Minhas certificações:</Strong></p>
 
         <div class="about-certs">
-          <span class="cert-tag">Analista Contábil CFIS</span>
-          <span class="cert-tag">Departamento Pessoal</span>
+          <span class="cert-tag">Analista Contábil </span>
+          <span class="cert-tag">Analista de Departamento Pessoal</span>
           <span class="cert-tag">Analista Fiscal</span>
-          <span class="cert-tag">ECD / ECF 2024</span>
-          <span class="cert-tag">DCTFWEB</span>
-          <span class="cert-tag">ICMS ST</span>
-          <span class="cert-tag">SPED Fiscal</span>
-          <span class="cert-tag">Perícia Contábil</span>
+          <span class="cert-tag">Cálculos de Folha de Pagamento</span>
+          <span class="cert-tag">Cruzamentos SPED Fiscal (EFD ICMS-IPI)</span>
+          <span class="cert-tag">DCTFWEB Na Prática</span>
+          <span class="cert-tag">ECD 2024, ECF 2024</span>
+          <span class="cert-tag">Faturamento e Emissão de Notas Fiscais</span>
+          <span class="cert-tag">Fundamentos da Perícia Contábil</span>
+         <span class="cert-tag"> ICMS: Aspectos Constitucionais e Práticos</span>
+         <span class="cert-tag">ICMS Substituição Tributária (ICMS ST)</span>
+         <span class="cert-tag">Planejamento Estratégico Aplicado à Área Fiscal</span>
         </div>
       </div>
     </div>
@@ -2503,7 +2773,7 @@
         </div>
         <div class="contact-detail">
           <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0a7c726965647e6b686366636e6b6e6f4a6d676b636624696567">vxcontabilidade@gmail.com</a></span>
+          <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0a7c726965647e6b686366636e6b6e6f4a6d676b636624696567"><span class="__cf_email__" data-cfemail="9fe9e7fcf0f1ebfefdf6f3f6fbfefbfadff8f2fef6f3b1fcf0f2">vxcontabilidade@gmail.com</span></a></span>
         </div>
         <div class="contact-detail">
           <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -2595,7 +2865,7 @@
 <!-- ===== BACK TO TOP ===== -->
 <button class="back-to-top" id="backToTop" aria-label="Voltar ao topo" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ===== HEADER SCROLL =====
 const header = document.getElementById('header');
 window.addEventListener('scroll', () => {
