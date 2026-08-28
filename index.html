@@ -91,7 +91,7 @@
             {"@type":"Offer","priceCurrency":"BRL","price":"150.00","itemOffered":{"@type":"Service","name":"Assessoria Contábil para MEI — Plano Protegido","description":"Assessoria mensal para MEI com faturamento de R$ 5.001,00 a R$ 6.000,00, incluindo até 10 notas fiscais por mês."}},
             {"@type":"Offer","priceCurrency":"BRL","price":"180.00","itemOffered":{"@type":"Service","name":"Assessoria Contábil para MEI — Plano Crescimento","description":"Assessoria mensal para MEI com faturamento de R$ 6.001,00 a R$ 6.750,00, incluindo até 15 notas fiscais por mês."}},
             {"@type":"Offer","itemOffered":{"@type":"Service","name":"Gestão Contábil Mensal para MEI","description":"Gestão mensal do DAS, emissão de notas fiscais e declaração anual (DASN-SIMEI) para quem já é MEI."}},
-            {"@type":"Offer","itemOffered":{"@type":"Service","name":"Simples Nacional para Prestadores de Serviço","description":"Contabilidade completa para prestadores de serviço optantes pelo Simples Nacional."}},
+            {"@type":"Offer","availability":"https://schema.org/InStock","itemOffered":{"@type":"Service","name":"Simples Nacional para Prestadores de Serviço","description":"Contabilidade completa para prestadores de serviço optantes pelo Simples Nacional: apuração mensal de impostos, escrituração contábil, NFS-e, folha de pagamento e orientação tributária. Valores sob consulta, conforme o porte da empresa."}},
             {"@type":"Offer","itemOffered":{"@type":"Service","name":"Imposto de Renda Pessoa Física","description":"Declaração do IRPF com análise detalhada e segurança."}},
             {"@type":"Offer","itemOffered":{"@type":"Service","name":"Cálculos Trabalhistas","description":"Cálculos de rescisões, férias, 13º salário, FGTS e laudos."}},
             {"@type":"Offer","itemOffered":{"@type":"Service","name":"BPO Financeiro","description":"Controle financeiro externo com contas a pagar e receber."}},
@@ -1192,44 +1192,107 @@
     }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-    /* ===== PROMO TABS ===== */
-    .promo-tabs {
+    /* ===== BLOCO SIMPLES NACIONAL ===== */
+    .sn-block {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 0;
+      background: linear-gradient(135deg, #0a1628 0%, #14213D 60%, #1e3a6e 100%);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 24px 70px rgba(10,22,40,0.22);
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+    .sn-block-main { padding: 40px 40px 36px; }
+    .sn-block-head {
       display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin-top: 40px;
+      align-items: flex-start;
+      gap: 18px;
+      margin-bottom: 26px;
     }
-    .promo-tab {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 28px;
-      border-radius: 50px;
-      border: 2px solid var(--gray-200);
-      background: var(--white);
-      color: var(--gray-700);
-      font-family: var(--font-body);
+    .sn-block-icon {
+      width: 56px; height: 56px;
+      flex-shrink: 0;
+      border-radius: 16px;
+      background: rgba(240,200,74,0.14);
+      border: 1px solid rgba(240,200,74,0.22);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .sn-block-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .sn-block-title {
+      font-family: var(--font-display);
+      font-size: 30px;
+      color: var(--white);
+      line-height: 1.18;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+    .sn-block-sub {
       font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.25s var(--ease);
-      letter-spacing: 0.1px;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.6;
+      max-width: 56ch;
     }
-    .promo-tab:hover {
-      border-color: var(--accent);
-      color: var(--accent);
+    .sn-block-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 2px 32px;
     }
-    .promo-tab--active {
-      background: var(--navy);
-      border-color: var(--navy);
-      color: var(--white);
-      box-shadow: 0 4px 16px rgba(10,22,40,0.2);
+    .sn-block-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 11px 0;
+      font-size: 15px;
+      line-height: 1.45;
+      color: rgba(255,255,255,0.92);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
-    .promo-tab--active:hover {
-      background: var(--navy-light);
-      border-color: var(--navy-light);
-      color: var(--white);
+    .sn-block-list li svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; }
+    @media (min-width: 769px) { .sn-block-list li:nth-last-child(-n+2) { border-bottom: none; } }
+    @media (max-width: 768px) { .sn-block-list li:last-child { border-bottom: none; } }
+    .sn-block-cta {
+      background: rgba(255,255,255,0.05);
+      border-left: 1px solid rgba(255,255,255,0.09);
+      padding: 40px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
     }
+    .sn-block-price-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+    }
+    .sn-block-price {
+      font-family: var(--font-display);
+      font-size: 34px;
+      line-height: 1.15;
+      color: var(--gold);
+      letter-spacing: -0.02em;
+      margin: 10px 0 14px;
+    }
+    .sn-block-note {
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 22px;
+    }
+    .sn-block .plan-btn { width: 100%; }
+
     .promo-panel { display: block; }
     .promo-panel--hidden { display: none; }
 
@@ -1500,6 +1563,8 @@
       .promo-grid { grid-template-columns: repeat(2, 1fr); }
       .promo-grid--3 { grid-template-columns: repeat(2, 1fr); }
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .sn-block { grid-template-columns: 1fr; }
+      .sn-block-cta { border-left: none; border-top: 1px solid rgba(255,255,255,0.09); }
     }
     @media (max-width: 768px) {
       .nav-menu { display: none; }
@@ -1512,7 +1577,11 @@
       .services-grid { grid-template-columns: 1fr; }
       .promo-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
       .promo-grid--3 { grid-template-columns: 1fr; }
-      .promo-tabs { flex-direction: column; align-items: center; }
+      .sn-block-main { padding: 30px 24px 26px; }
+      .sn-block-cta { padding: 30px 24px; }
+      .sn-block-list { grid-template-columns: 1fr; gap: 0; }
+      .sn-block-head { flex-direction: column; gap: 14px; }
+      .sn-block-title { font-size: 25px; }
       .mei-inner { grid-template-columns: 1fr; gap: 40px; }
       .about-inner { grid-template-columns: 1fr; gap: 40px; }
       .about-photo-badge { bottom: 10px; right: 10px; }
@@ -1754,10 +1823,6 @@
       box-shadow: var(--shadow-lift);
     }
 
-    /* --- Promo tabs: refined --- */
-    .promo-tab { transition: all .3s var(--ease-soft); }
-    .promo-tab:hover { transform: translateY(-1px); }
-
     /* --- Reduce motion --- */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -1768,15 +1833,39 @@
       }
     }
 
-    /* ============================================
-       AJUSTE TIPOGRÁFICO DESKTOP (≥ 992px)
-       Aumenta os tamanhos de fonte do site inteiro
-       para melhor legibilidade em telas grandes.
-       ============================================ */
+    /* ==========================================================
+       CAMADA DESKTOP (≥ 992px)
+       Escala tipográfica equilibrada + melhor aproveitamento
+       da largura da tela. Nada aqui afeta o mobile (< 992px).
+       ========================================================== */
     @media (min-width: 992px) {
-      html { font-size: 20px; }
+      html { font-size: 17px; }
 
-      /* Parágrafos e texto corrido */
+      /* --- Largura útil e respiro das seções --- */
+      section { padding: 96px 48px; }
+      .container { max-width: 1200px; }
+      .welcome-section { padding: 88px 48px; }
+      .welcome-grid { max-width: 1120px; gap: 64px; grid-template-columns: 1.45fr 1fr; align-items: center; }
+      .welcome-crc {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+        padding: 32px 32px 30px;
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-soft);
+      }
+      .welcome-crc-icon { width: 56px; height: 56px; border-radius: 14px; }
+      .welcome-crc-icon svg { width: 30px; height: 30px; }
+      .welcome-crc-text strong { font-size: 18px; margin-bottom: 6px; }
+      .welcome-crc-text span { font-size: 15px; line-height: 1.6; }
+      .mei-inner,
+      .about-inner,
+      .mvv-grid { max-width: 1120px; }
+      .stats-grid { max-width: 1000px; }
+      .contact-inner { max-width: 1080px; }
+      .faq-list { max-width: 860px; }
+
+      /* --- Texto corrido: legível sem exagero --- */
       body, p, li, td, th, label, input, textarea, select, button,
       .welcome-text p, .service-card p, .mvv-card p,
       .plan-features li, .plan-faturamento, .plan-desc,
@@ -1784,104 +1873,134 @@
       .contact-info p, .contact-info a,
       .footer-bottom, .footer-links a,
       .about-text p, .about-cert span {
-        font-size: 19px;
-        line-height: 1.7;
+        font-size: 17px;
+        line-height: 1.65;
       }
 
-      /* Títulos de seção */
-      .section-title { font-size: 48px !important; line-height: 1.18; }
-      .section-sub { font-size: 20px !important; line-height: 1.65; }
-      .section-tag { font-size: 15px !important; letter-spacing: 1.8px; }
+      /* --- Títulos de seção --- */
+      .section-title { font-size: 40px !important; line-height: 1.16; }
+      .section-sub { font-size: 18px !important; line-height: 1.65; max-width: 620px; }
+      .section-tag { font-size: 12.5px !important; letter-spacing: 1.8px; }
 
-      /* Hero */
-      .hero h1 { font-size: clamp(56px, 8vw, 96px) !important; line-height: 1.08; }
-      .hero-sub { font-size: 25px !important; line-height: 1.6; }
+      /* --- Hero: título em menos linhas, bloco mais contido --- */
+      .hero { min-height: 88vh; padding: 120px 48px 96px; }
+      .hero-content { max-width: 960px; }
+      .hero h1 { font-size: clamp(52px, 5.2vw, 72px) !important; line-height: 1.06; }
+      .hero-sub { font-size: 20px !important; line-height: 1.6; max-width: 680px; margin-bottom: 40px; }
+      .hero-badge { font-size: 12.5px; margin-bottom: 28px; }
 
-      /* Welcome */
-      .welcome-text h2 { font-size: 42px; }
-      .welcome-text p { font-size: 20px; line-height: 1.75; }
+      /* --- Welcome --- */
+      .welcome-text h2 { font-size: 36px; }
+      .welcome-text p { font-size: 17.5px; line-height: 1.72; }
 
-      /* Cards de serviços */
-      .service-card h3 { font-size: 25px !important; }
-      .service-card p { font-size: 18px !important; line-height: 1.7; }
+      /* --- Cards de serviços --- */
+      .service-card h3 { font-size: 21px !important; line-height: 1.3; }
+      .service-card p { font-size: 16px !important; line-height: 1.65; }
 
-      /* Planos */
-      .plan-name { font-size: 30px !important; }
-      .plan-faturamento { font-size: 16.5px !important; }
-      .plan-desc { font-size: 17px !important; }
-      .plan-features li { font-size: 17.5px !important; line-height: 1.7; }
-      .plan-tag { font-size: 14px !important; letter-spacing: 1.5px; }
-      .plan-price { font-size: 54px !important; }
-      .plan-price sup { font-size: 24px !important; }
-      .plan-price span { font-size: 18px !important; }
-      .plan-btn { font-size: 16.5px !important; padding: 16px 24px !important; }
+      /* --- Planos: cards alinhados e proporcionais --- */
+      .promo-grid { gap: 24px; }
+      .plan-header { padding: 34px 26px 26px; min-height: 236px; display: flex; flex-direction: column; justify-content: center; }
+      .plan-name { font-size: 26px !important; }
+      .plan-faturamento { font-size: 15px !important; line-height: 1.5; }
+      .plan-desc { font-size: 15px !important; min-height: 52px; display: flex; align-items: center; justify-content: center; }
+      .plan-features li { font-size: 15.5px !important; line-height: 1.55; padding: 11px 0; }
+      .plan-tag { font-size: 11.5px !important; letter-spacing: 1.2px; }
+      .plan-price { font-size: 46px !important; }
+      .plan-price sup { font-size: 21px !important; }
+      .plan-price span { font-size: 16px !important; }
+      .plan-btn { font-size: 15.5px !important; padding: 15px 22px !important; }
 
-      /* MEI Section */
-      .mei-list li { font-size: 17.5px !important; line-height: 1.75; }
-      .mei-list li div { font-size: 17.5px !important; }
-      .mei-badge { font-size: 15px !important; }
+      /* --- Bloco Simples Nacional --- */
+      .sn-block { grid-template-columns: 1fr 340px; margin-top: 36px; }
+      .sn-block-title { font-size: 30px; }
+      .sn-block-sub { font-size: 16px; }
+      .sn-block-list li { font-size: 15.5px !important; }
+      .sn-block-price { font-size: 34px; }
+      .sn-block-note { font-size: 14px !important; }
 
-      /* Sobre */
-      .about-text p { font-size: 19px !important; line-height: 1.8; }
-      .about-cert { font-size: 17px !important; }
-      .about-cert span { font-size: 16px !important; }
-      .about-photo-badge strong { font-size: 18px !important; }
-      .about-photo-badge span { font-size: 15.5px !important; }
+      /* --- Seção MEI --- */
+      .mei-list li { font-size: 16px !important; line-height: 1.65; }
+      .mei-list li div { font-size: 16px !important; }
+      .mei-badge { font-size: 13.5px !important; }
 
-      /* MVV (Missão, Visão, Valores) */
-      .mvv-card h3 { font-size: 30px !important; }
-      .mvv-card p { font-size: 18px !important; line-height: 1.85; }
+      /* --- Sobre --- */
+      .about-text p { font-size: 17px !important; line-height: 1.75; }
+      .about-cert { font-size: 15.5px !important; }
+      .about-cert span { font-size: 15px !important; }
+      .about-photo-badge strong { font-size: 16px !important; }
+      .about-photo-badge span { font-size: 14px !important; }
 
-      /* FAQ */
-      .faq-question { font-size: 20px !important; padding: 24px 30px !important; }
-      .faq-answer { font-size: 17.5px !important; line-height: 1.75; padding-left: 30px !important; padding-right: 30px !important; }
-      .faq-answer.open { padding-bottom: 24px !important; }
+      /* --- MVV --- */
+      .mvv-card h3 { font-size: 24px !important; }
+      .mvv-card p { font-size: 16px !important; line-height: 1.75; }
 
-      /* Contato */
-      .contact-info h3 { font-size: 25px !important; }
-      .contact-info p, .contact-info a { font-size: 18px !important; }
-      .contact-form label { font-size: 16px !important; }
-      .contact-form input, .contact-form textarea { font-size: 17.5px !important; padding: 16px 18px !important; }
-      .contact-form button { font-size: 18px !important; padding: 18px 28px !important; }
+      /* --- FAQ --- */
+      .faq-question { font-size: 18px !important; padding: 22px 26px !important; }
+      .faq-answer { font-size: 16.5px !important; line-height: 1.7; padding-left: 26px !important; padding-right: 26px !important; }
+      .faq-answer.open { padding-bottom: 22px !important; }
 
-      /* Botões principais (hero e CTAs) */
+      /* --- Contato --- */
+      .contact-info h3 { font-size: 21px !important; }
+      .contact-info p, .contact-info a { font-size: 16.5px !important; }
+      .contact-form label { font-size: 14.5px !important; }
+      .contact-form input, .contact-form textarea { font-size: 16px !important; padding: 14px 16px !important; }
+      .contact-form button { font-size: 16.5px !important; padding: 16px 26px !important; }
+
+      /* --- Botões principais --- */
       .btn-primary, .btn-outline {
-        font-size: 19px !important;
-        padding: 18px 32px !important;
+        font-size: 16.5px !important;
+        padding: 16px 30px !important;
       }
 
-      /* Navegação */
-      .nav-links a { font-size: 17px !important; }
-      .logo-text { font-size: 22px !important; }
-      .logo-sub { font-size: 13.5px !important; }
+      /* --- Navegação --- */
+      .header { padding: 0 48px; }
+      .nav-menu a, .nav-links a { font-size: 15px !important; }
+      .logo-text { font-size: 20px !important; }
+      .logo-sub { font-size: 12.5px !important; }
 
-      /* Footer */
-      .footer-bottom { font-size: 15.5px !important; }
-      .footer-links a { font-size: 16.5px !important; }
+      /* --- Rodapé --- */
+      .footer-bottom { font-size: 14px !important; }
+      .footer-links a { font-size: 15px !important; }
 
-      /* Depoimentos */
-      .testimonials-title .section-title { font-size: 42px !important; }
+      /* --- Depoimentos --- */
+      .testimonials-title .section-title { font-size: 36px !important; }
     }
 
-    /* Desktop largo (≥ 1400px) — boost extra */
+    /* --- Desktop largo (≥ 1400px): mais largura, não mais fonte --- */
     @media (min-width: 1400px) {
-      html { font-size: 21px; }
-      .hero h1 { font-size: clamp(64px, 8vw, 108px) !important; }
-      .hero-sub { font-size: 27px !important; }
-      .section-title { font-size: 54px !important; }
-      .section-sub { font-size: 22px !important; }
-      .welcome-text h2 { font-size: 48px; }
-      .welcome-text p { font-size: 22px; }
-      .service-card h3 { font-size: 27px !important; }
-      .service-card p { font-size: 19px !important; }
-      .plan-name { font-size: 32px !important; }
-      .plan-features li { font-size: 18.5px !important; }
-      .faq-question { font-size: 22px !important; }
-      .faq-answer { font-size: 18.5px !important; }
-      .about-text p { font-size: 20px !important; }
-      .mvv-card p { font-size: 19px !important; }
-      .contact-info p, .contact-info a { font-size: 19px !important; }
+      html { font-size: 17.5px; }
+      section { padding: 108px 56px; }
+      .container { max-width: 1320px; }
+      .welcome-grid { max-width: 1200px; }
+      .mei-inner, .about-inner, .mvv-grid { max-width: 1200px; }
+      .contact-inner { max-width: 1160px; }
+      .hero-content { max-width: 1040px; }
+      .hero h1 { font-size: clamp(60px, 4.8vw, 80px) !important; }
+      .hero-sub { font-size: 21px !important; max-width: 720px; }
+      .section-title { font-size: 44px !important; }
+      .section-sub { font-size: 19px !important; }
+      .welcome-text h2 { font-size: 40px; }
+      .welcome-text p { font-size: 18px; }
+      .service-card h3 { font-size: 22px !important; }
+      .service-card p { font-size: 16.5px !important; }
+      .plan-name { font-size: 28px !important; }
+      .plan-features li { font-size: 16px !important; }
+      .sn-block { grid-template-columns: 1fr 380px; }
+      .sn-block-title { font-size: 33px; }
+      .faq-question { font-size: 19px !important; }
+      .faq-answer { font-size: 17px !important; }
+      .about-text p { font-size: 17.5px !important; }
+      .mvv-card p { font-size: 16.5px !important; }
+      .contact-info p, .contact-info a { font-size: 17px !important; }
     }
+
+    /* --- Desktop muito largo (≥ 1800px) --- */
+    @media (min-width: 1800px) {
+      .container { max-width: 1420px; }
+      .welcome-grid, .mei-inner, .about-inner, .mvv-grid { max-width: 1280px; }
+      .hero-content { max-width: 1120px; }
+    }
+
   </style>
 </head>
 <body>
@@ -1967,7 +2086,7 @@
       <div class="welcome-crc-text">
         <strong>Vitor de Oliveira Xavier</strong>
         <span>Contador — CRC-RJ nº 137627/O-4</span>
-        <span style="display:block; font-size:12px; color:rgba(255,255,255,0.6); margin-top:4px;">Seg–Sex: 09h às 18h</span>
+        <span style="display:block; font-size:12px; color:var(--gray-500); opacity:.72; margin-top:4px;">Seg–Sex: 09h às 18h</span>
       </div>
     </div>
   </div>
@@ -2060,25 +2179,13 @@
 <section id="promocoes" class="promo-section">
   <div class="container">
     <div class="centered fade-in">
-      <span class="section-tag">Planos para MEI</span>
+      <span class="section-tag">Planos MEI e Simples Nacional</span>
       <h2 class="section-title">Assessoria para MEI <em>a partir de R$ 120,00</em></h2>
-      <p class="section-sub">Três planos que se adaptam ao seu faturamento mensal como MEI. Sem surpresa: a mensalidade acompanha o seu momento de negócio.</p>
+      <p class="section-sub">Três planos que se adaptam ao seu faturamento mensal como MEI — e atendimento sob medida para prestadores de serviço do Simples Nacional.</p>
     </div>
 
-    <!-- TAB SWITCHER -->
-    <div class="promo-tabs fade-in" role="tablist" aria-label="Categorias de planos">
-      <button class="promo-tab promo-tab--active" id="tab-mei" role="tab" aria-selected="true" aria-controls="panel-mei" onclick="switchPromoTab('mei')">
-        <svg width="18" height="18" viewBox="0 0 32 32" fill="none"><rect x="6" y="9" width="20" height="14" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M11 9V7a5 5 0 0 1 10 0v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="16" cy="16" r="2.5" fill="currentColor"/></svg>
-        Planos MEI
-      </button>
-      <button class="promo-tab" id="tab-sn" role="tab" aria-selected="false" aria-controls="panel-sn" onclick="switchPromoTab('sn')">
-        <svg width="18" height="18" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="4" stroke="currentColor" stroke-width="1.8"/><path d="M10 16l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Simples Nacional (Prestador de Serviço)
-      </button>
-    </div>
-
-    <!-- PANEL MEI -->
-    <div id="panel-mei" class="promo-panel" role="tabpanel" aria-labelledby="tab-mei">
+    <!-- PLANOS MEI -->
+    <div class="promo-panel">
       <div class="promo-grid promo-grid--3">
 
         <!-- PLANO MEI ESSENCIAL -->
@@ -2094,7 +2201,8 @@
           <div class="plan-price-wrap">
             <div class="plan-price">R$&nbsp;120<span>/mês</span></div>
           </div>
-          <div class="plan-body" style="padding-top:16px;">
+          <div class="plan-desc">Para MEIs que precisam do essencial sempre em dia.</div>
+          <div class="plan-body" style="padding-top:12px;">
             <ul class="plan-features">
               <li><svg viewBox="0 0 16 16" fill="none" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 4.5l-7 7L3 8"/></svg>Guia DAS mensal</li>
               <li><svg viewBox="0 0 16 16" fill="none" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 4.5l-7 7L3 8"/></svg>Até 5 notas fiscais por mês</li>
@@ -2164,79 +2272,35 @@
       <p style="text-align:center; margin-top:24px; font-size:13px; color:var(--gray-500);">* Se o faturamento variar de um mês para o outro, a mensalidade é ajustada automaticamente para o plano correspondente.</p>
     </div><!-- /panel-mei -->
 
-    <!-- PANEL SIMPLES NACIONAL -->
-    <div id="panel-sn" class="promo-panel promo-panel--hidden" role="tabpanel" aria-labelledby="tab-sn">
-      <div class="promo-grid promo-grid--3">
-
-        <!-- SN STARTER -->
-        <div class="plan-card fade-in">
-          <div class="plan-header plan-header--blue">
-            <div class="plan-icon-wrap">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="4" stroke="#f0c84a" stroke-width="1.8"/><path d="M10 16l4 4 8-8" stroke="#f0c84a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-            <div class="plan-tag">Simples Nacional · Prestador de Serviço</div>
-            <h3 class="plan-name">Plano Starter</h3>
-            <p class="plan-faturamento">Faturamento até R$&nbsp;30.000/mês</p>
+    <!-- SIMPLES NACIONAL — BLOCO ÚNICO -->
+    <div class="sn-block fade-in">
+      <div class="sn-block-main">
+        <div class="sn-block-head">
+          <div class="sn-block-icon">
+            <svg width="30" height="30" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="4" stroke="#f0c84a" stroke-width="1.8"/><path d="M10 16l4 4 8-8" stroke="#f0c84a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
-          <div class="plan-body">
-            <ul class="plan-features">
-              <li><svg viewBox="0 0 16 16" fill="none" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 4.5l-7 7L3 8"/></svg>Apuração mensal de impostos</li>
-              <li><svg viewBox="0 0 16 16" fill="none" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 4.5l-7 7L3 8"/></svg>Escrituração contábil</li>
-              <li><svg viewBox="0 0 16 16" fill="none" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 4.5l-7 7L3 8"/></svg>Emissão de notas fiscais de serviço (NFS-e)</li>
-              <li><svg viewBox="0 0 16 16" fill="none" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 4.5l-7 7L3 8"/></svg>Suporte via WhatsApp</li>
-              <li><svg viewBox="0 0 16 16" fill="none" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 4.5l-7 7L3 8"/></svg>Orientação fiscal mensal</li>
-            </ul>
-            <a href="https://wa.me/5521985430782?text=Ol%C3%A1!%20Sou%20prestador%20de%20servi%C3%A7o%20e%20tenho%20interesse%20no%20Plano%20Simples%20Nacional%20Starter." class="plan-btn" target="_blank" rel="noopener">Solicitar orçamento</a>
+          <div>
+            <div class="sn-block-tag">Simples Nacional</div>
+            <h3 class="sn-block-title">Contabilidade para prestadores de serviço</h3>
+            <p class="sn-block-sub">Empresas de serviço optantes pelo Simples Nacional. Escopo e mensalidade definidos conforme o porte e a rotina do seu negócio.</p>
           </div>
         </div>
-
-        <!-- SN PROFISSIONAL -->
-        <div class="plan-card plan-card--featured fade-in">
-          <div class="plan-header plan-header--gold">
-            <div class="plan-icon-wrap">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 3l2.8 5.6 6.2.9-4.5 4.4 1.06 6.2L16 17.1l-5.56 2.9 1.06-6.2L7 9.5l6.2-.9L16 3z" stroke="#0a1628" stroke-width="1.8" stroke-linejoin="round"/></svg>
-            </div>
-            <div class="plan-tag plan-tag--dark">Simples Nacional · Prestador de Serviço</div>
-            <h3 class="plan-name plan-name--dark">Plano Profissional</h3>
-            <p class="plan-faturamento plan-faturamento--dark">Faturamento R$&nbsp;30.001–80.000/mês</p>
-          </div>
-          <div class="plan-body">
-            <ul class="plan-features">
-              <li><svg viewBox="0 0 16 16" fill="none" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 4.5l-7 7L3 8"/></svg>Tudo do Plano Starter</li>
-              <li><svg viewBox="0 0 16 16" fill="none" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 4.5l-7 7L3 8"/></svg>Folha de pagamento completa</li>
-              <li><svg viewBox="0 0 16 16" fill="none" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 4.5l-7 7L3 8"/></svg>Cálculos trabalhistas (férias, 13º, rescisões)</li>
-              <li><svg viewBox="0 0 16 16" fill="none" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 4.5l-7 7L3 8"/></svg>Consultoria tributária mensal</li>
-              <li><svg viewBox="0 0 16 16" fill="none" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 4.5l-7 7L3 8"/></svg>Atendimento prioritário</li>
-            </ul>
-            <a href="https://wa.me/5521985430782?text=Ol%C3%A1!%20Tenho%20interesse%20no%20Plano%20Simples%20Nacional%20Profissional." class="plan-btn plan-btn--dark" target="_blank" rel="noopener">Solicitar orçamento</a>
-          </div>
-        </div>
-
-        <!-- SN EMPRESARIAL -->
-        <div class="plan-card plan-card--navy fade-in">
-          <div class="plan-header plan-header--navy">
-            <div class="plan-icon-wrap plan-icon-wrap--light">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><polyline points="4,24 11,14 17,19 27,8" stroke="#f0c84a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="21,8 27,8 27,14" stroke="#f0c84a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-            <div class="plan-tag plan-tag--gold">Simples Nacional · Prestador de Serviço</div>
-            <h3 class="plan-name">Plano Empresarial</h3>
-            <p class="plan-faturamento">Faturamento acima de R$&nbsp;80.000/mês</p>
-          </div>
-          <div class="plan-body plan-body--navy">
-            <ul class="plan-features plan-features--light">
-              <li><svg viewBox="0 0 16 16" fill="none" stroke="#f0c84a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 4.5l-7 7L3 8"/></svg>Tudo do Plano Profissional</li>
-              <li><svg viewBox="0 0 16 16" fill="none" stroke="#f0c84a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 4.5l-7 7L3 8"/></svg>BPO Financeiro integrado</li>
-              <li><svg viewBox="0 0 16 16" fill="none" stroke="#f0c84a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 4.5l-7 7L3 8"/></svg>Planejamento tributário anual</li>
-              <li><svg viewBox="0 0 16 16" fill="none" stroke="#f0c84a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 4.5l-7 7L3 8"/></svg>Análise de enquadramento de regime</li>
-              <li><svg viewBox="0 0 16 16" fill="none" stroke="#f0c84a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 4.5l-7 7L3 8"/></svg>Relatório gerencial mensal</li>
-            </ul>
-            <a href="https://wa.me/5521985430782?text=Ol%C3%A1!%20Tenho%20interesse%20no%20Plano%20Simples%20Nacional%20Empresarial." class="plan-btn plan-btn--gold" target="_blank" rel="noopener">Solicitar orçamento</a>
-          </div>
-        </div>
-
-      </div><!-- /promo-grid 3-col sn -->
-      <p style="text-align:center; margin-top:24px; font-size:13px; color:var(--gray-500);">* Valores sob consulta. Fale conosco para um orçamento personalizado para o seu negócio.</p>
-    </div><!-- /panel-sn -->
+        <ul class="sn-block-list">
+          <li><svg viewBox="0 0 16 16" fill="none" stroke="#f0c84a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 4.5l-7 7L3 8"/></svg>Apuração mensal de impostos</li>
+          <li><svg viewBox="0 0 16 16" fill="none" stroke="#f0c84a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 4.5l-7 7L3 8"/></svg>Escrituração contábil completa</li>
+          <li><svg viewBox="0 0 16 16" fill="none" stroke="#f0c84a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 4.5l-7 7L3 8"/></svg>Emissão de notas fiscais de serviço (NFS-e)</li>
+          <li><svg viewBox="0 0 16 16" fill="none" stroke="#f0c84a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 4.5l-7 7L3 8"/></svg>Folha de pagamento e cálculos trabalhistas</li>
+          <li><svg viewBox="0 0 16 16" fill="none" stroke="#f0c84a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 4.5l-7 7L3 8"/></svg>Orientação fiscal e tributária mensal</li>
+          <li><svg viewBox="0 0 16 16" fill="none" stroke="#f0c84a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 4.5l-7 7L3 8"/></svg>Suporte via WhatsApp com o contador</li>
+        </ul>
+      </div>
+      <aside class="sn-block-cta">
+        <span class="sn-block-price-label">Mensalidade</span>
+        <div class="sn-block-price">Consulte<br>condições</div>
+        <p class="sn-block-note">Orçamento personalizado conforme o porte, o volume de notas e a folha da sua empresa.</p>
+        <a href="https://wa.me/5521985430782?text=Ol%C3%A1!%20Sou%20prestador%20de%20servi%C3%A7o%20no%20Simples%20Nacional%20e%20gostaria%20de%20consultar%20as%20condi%C3%A7%C3%B5es." class="plan-btn plan-btn--gold" target="_blank" rel="noopener">Consultar condições</a>
+      </aside>
+    </div><!-- /sn-block -->
 
   </div>
 </section>
@@ -2793,16 +2857,6 @@ document.querySelectorAll('section[id]').forEach(s => sectionObs.observe(s));
   startAuto();
 })();
 
-// ===== PROMO TABS =====
-function switchPromoTab(tab) {
-  const tabs = { mei: document.getElementById('tab-mei'), sn: document.getElementById('tab-sn') };
-  const panels = { mei: document.getElementById('panel-mei'), sn: document.getElementById('panel-sn') };
-  Object.keys(tabs).forEach(key => {
-    tabs[key].classList.toggle('promo-tab--active', key === tab);
-    tabs[key].setAttribute('aria-selected', key === tab ? 'true' : 'false');
-    panels[key].classList.toggle('promo-panel--hidden', key !== tab);
-  });
-}
 
 // ===== WHATSAPP FORM =====
 function sendToWhatsApp() {
